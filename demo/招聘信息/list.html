@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>招贤纳士-社会招聘</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<!--<base target="_blank" />-->
+		<script src="js/data.js"></script>
+	</head>
+
+	<body onselectstart="return false">
+		<div id="wrap">
+			<div class="left">
+				<h2>招贤纳士</h2>
+				<ul id="left_ul">
+					<!--<li class="focus"><a href="javascript:;">社会招聘</a></li>
+      				<li><a href="javascript:;">校园招聘</a></li> -->
+				</ul>
+			</div>
+			<div class="right">
+				<div class="title">
+					<img src="img/shzp.gif" id="tit_img"/>
+				</div>
+				<div class="info" id="content">
+					<!--<p class="zp">
+			        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+			          	<span>需求人数：2名</span>
+			         	<span class="date">2013年7月30日</span>
+			        </p>
+      				<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+      				</p>	
+			      	<p class="zp">
+			        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+			          	<span>需求人数：12名</span>
+			         	<span class="date">2013年7月30日</span>
+			        </p>
+			      	<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+			       </p>
+			      	<p class="zp">
+			        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+			          	<span>需求人数：21名</span>
+			         	<span class="date">2013年7月30日</span>
+			        </p>
+			      	<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+			       </p> -->
+				</div>
+				<div class="pages">
+					<span class="prev" id="prev1">
+			          	<a href="javascript:;">
+			            	<img src="img/pre.gif">
+			          	</a>
+			        </span>
+					<span class="next" id="next1">
+			          	<a href="javascript:;">
+			          		<img src="img/next.gif">
+			          	</a>
+			        </span>
+					<p id="page1">
+						<!--<span class="focus">
+		       				<a href="javascript:;">1</a>
+				        </span>
+				        <span>
+				        	<a href="javascript:;">2</a>
+				        </span>
+				        <span>
+				        	<a href="javascript:;">3</a>
+				        </span> -->
+					</p>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<script src="js/global.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			//初始化
+			creat();   //绘制左面所有li
+			creatContent1() //绘制第一页内容区
+			//当哈希改变时触发
+			window.onhashchange=function(){  //打开content，带search，带哈希
+				window.open("content.html"+window.location.search+window.location.hash,"_self");
+			}
+		</script>
+	</body>
+
+</html>

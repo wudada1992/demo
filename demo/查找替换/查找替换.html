@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>查找替换</title>
+		<style type="text/css">
+			#box{
+				width: 600px;
+				height: 400px;
+				border: 30px solid #efefe7;
+				border-right-width: 150px;
+				border-bottom-width: 270px;
+				padding: 25px;
+				position: relative;
+				margin:  50px auto;
+			}
+			#content{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 600px;
+				height: 400px;
+				padding: 25px;
+				line-height: 33px;
+				font-size: 18px;
+				text-indent: 36px;
+			}
+			#open{
+				position: absolute;
+				right: -120px;
+				top: -10px;
+				width: 80px;
+				height: 40px;
+				background: #808080;
+				color: #fff;
+				text-align: center;
+				line-height: 40px;
+				font-size: 16px;
+				cursor: pointer;
+			}
+			#btns{
+				display: none;
+				cursor: pointer;
+			}
+			#open:hover{
+				background: #595959;
+			}
+			#btns .btn{
+				background:#a0a0a0 ;
+				color: #000;
+				border-top: 1px solid #fff;
+			}
+			#btns .btn:hover{
+				background: #e73100;
+				color: #fff;
+			}
+			#bottom{
+				width: 610px;
+				height: 120px;
+				padding: 20px;
+				border: 20px solid #e71063;
+				background: #e7e7b5;
+				position: absolute;
+				bottom: -230px;
+				left: -20px;
+				display: none;
+			}
+			#bottom .header{
+				height: 40px;
+				border-bottom: 2px solid #e73100;
+			}
+			#bottom .header>div{
+				width: 100px;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				float: left;
+				position: relative;
+				cursor: pointer;
+			}
+			#bottom .header>div.active{
+				background: #e73100;
+				color: #fff;
+			}
+			.text{
+				display: none;
+				margin-top: 10px;
+				position: absolute;
+				bottom: -60px;
+				left: 0;
+				width: 600px;
+				text-align: left;
+			}
+			#reset .text{
+				left: -100px;
+			}
+			#bottom .header>div.active .text{
+				display: block;
+			}
+			input{
+				height: 30px;
+				font-size: 18px;
+			}
+			#xx{
+				width: 50px;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+				font-size: 48px;
+				font-weight: bold;
+				position: absolute;
+				top: 0;
+				right: 0;
+				cursor: pointer;
+			}
+			span{             /*查找时的标记*/
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="content">
+				话说天下大势，分久必合，合久必分。周末七国分争，并入于秦。及秦灭之后，楚、汉分争，又并入于汉。汉朝自高祖斩白蛇而起义，一统天下，后来光武中兴，传至献帝，遂分为三国。推其致乱之由，殆始于桓、灵二帝。桓帝禁锢善类，崇信宦官。及桓帝崩，灵帝即位，大将军窦武、太傅陈蕃共相辅佐。时有宦官曹节等弄权，窦武、陈蕃谋诛之，机事不密，反为所害，中涓自此愈横。建宁二年四月望日，帝御温德殿。方升座，殿角狂风骤起。只见一条大青蛇，从梁上飞将下来，蟠于椅上。帝惊倒，左右急救入宫，百官俱奔避。须臾，蛇不见了。忽然大雷大雨，加以冰雹，落到半夜方止，坏却房屋无数。建宁四年二月，洛阳地震；又海水泛溢，沿海居民，尽被大浪卷入海中。
+			</div>
+			<div id="open">
+				展开
+				<div id="btns">
+					<div class="btn">
+						查找
+					</div>
+					<div class="btn">
+						替换
+					</div>
+					<div class="btn">
+						重置
+					</div>
+				</div>
+			</div>
+			<div id="bottom">
+				<div id="xx">×</div>
+				<div class="header">
+					<div id="search" >
+						查找
+						<div class="text">
+							<input type="text" name="" id="search_text" value="" />
+							<input type="button" name="" id="search_btn" value="查找" />
+						</div>
+					</div>
+					<div id="reset">
+						替换
+						<div class="text">
+							<input type="text" name="" id="reset_text1" value="" />
+							<input type="text" name="" id="reset_text2" value="" />
+							<input type="button" name="" id="reset_btn" value="替换" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var open=document.getElementById("open");
+			var btns=document.getElementById("btns");
+			var search=document.getElementById("search");
+			var reset1=document.getElementById("reset");
+			var bottom=document.getElementById("bottom");
+			var xx=document.getElementById("xx");
+			var content=document.getElementById("content");
+			var searchT=document.getElementById("search_text");
+			var searchB=document.getElementById("search_btn");
+			var str0=content.innerHTML;
+			var str=content.innerHTML;
+			//展开按钮
+			open.onOff=false;    //对应展开按钮关闭
+			open.onclick=function(){
+				if(this.onOff==false){
+					this.onOff=true;
+					btns.style.display="block";
+				}else{
+					this.onOff=false;
+					btns.style.display="none";
+				}
+			}
+			btns.getElementsByClassName("btn")[0].onclick=function(){      //按下右侧查找
+				bottom.style.display="block";
+				reset1.className="";
+				search.className="active";
+			}
+			btns.getElementsByClassName("btn")[1].onclick=function(){
+				content.innerHTML=str;
+				bottom.style.display="block";
+				search.className="";
+				reset1.className="active";
+			}
+			btns.getElementsByClassName("btn")[2].onclick=function(){   //重置
+				content.innerHTML=str0;
+				str=str0;
+			}
+			//bottom关闭按钮
+			xx.onclick=function(){
+				bottom.style.display="none";
+			}
+			//查找替换按钮切换
+			search.onclick=function(){      //按下查找div
+				searchT.value="";
+				reset1.className="";
+				search.className="active";
+			}
+			reset1.onclick=function(){     //按下替换div
+				resetT1.value="";
+				resetT2.value="";
+				content.innerHTML=str;
+				search.className="";
+				reset1.className="active";
+			}
+			//按下查找按钮
+			searchB.onclick=function(){
+				if(searchT.value==""){
+					alert("请输入内容");
+				}else if(str.indexOf(searchT.value)==-1){
+					alert("对不起，没有查到您输入的：【"+searchT.value+"】");
+				}else{
+					var str1=str.split(searchT.value).join("<span>"+searchT.value+"</span>");   //split不会修改str
+					content.innerHTML=str1;
+				}
+			}
+			//按下替换按钮
+			var resetT1=document.getElementById("reset_text1");
+			var resetT2=document.getElementById("reset_text2");
+			var resetB=document.getElementById("reset_btn");
+			resetB.onclick=function(){
+				ev=event||window.event;
+				if(resetT1.value==""){
+					alert("请输入内容");
+				}else if(str.indexOf(resetT1.value)==-1){
+					alert("对不起，没有查到您输入的：【"+resetT1.value+"】");
+				}else{
+					var str1=str.split(resetT1.value).join(resetT2.value);
+					content.innerHTML=str1;
+					str=str1;
+				}
+				ev.cancelBubble=true;
+			}
+			//按下输入框
+			searchT.onclick=function(event){
+				ev=event||window.event;
+				ev.cancelBubble=true;
+			}
+			resetT1.onclick=function(event){
+				ev=event||window.event;
+				ev.cancelBubble=true;
+			}
+			resetT2.onclick=function(event){
+				ev=event||window.event;
+				ev.cancelBubble=true;
+			}
+		</script>
+	</body>
+</html>
