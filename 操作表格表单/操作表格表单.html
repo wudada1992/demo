@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    	body{
+    		width: 600px;
+    		margin: 200px auto;
+    	}
+        form {
+            margin: 10px 0;
+        }
+        td {
+            text-align: center;
+        }
+        table{
+        	border-collapse:collapse;
+        }
+    </style>
+    <script>
+
+        /*
+        * 1.通过表单，可以添加数据到表格中显示
+        * 2.id自动根据已有的最大id值进行累加，删除一条记录的时候
+        * 3.隔行变色，新增加的行应该也需要隔行变色的
+        * 4.鼠标移入高亮
+        * 5.全选/全不选（checkAll和下面的每一个checkbox是有关联的）
+        * 6.选中变色
+        * 7.上移/下移
+        * 8.删除
+        *
+        * 9.选做：排序
+        * */
+		
+        var data = [
+            {
+                id: 1,
+                name : '胖胖',
+                sex : '男',
+                age : 32
+            },
+            {
+                id: 2,
+                name : '笨笨',
+                sex : '男',
+                age : 28
+            },
+            {
+                id: 3,
+                name : '菜菜',
+                sex : '女',
+                age : 18
+            }
+        ];
+       
+    </script>
+</head>
+
+<body>
+<form>
+    <input type="text" name="username" placeholder="请输入姓名"/>
+    <select name="sex">
+        <option value="">请选择一个性别</option>
+        <option value="男">男</option>
+        <option value="女">女</option>
+    </select>
+    <input type="text" name="age" placeholder="请输入年龄"/>
+    <input type="button" value="提交" id="submit">
+</form>
+<!--选做-->
+<p id="p">
+    <select name="orderName" id="orderName">    <!-- select的value只能是下面三个中的一个value-->
+        <option value="">选择一个排序字段</option>
+        <option value="id">编号</option>
+        <option value="age">年龄</option>
+    </select>
+    <select name="orderBy" id="orderBy">
+        <option value="">选择一个排序方式</option>
+        <option value="asc">升序</option>
+        <option value="desc">降序</option>
+    </select>
+    <input type="button" value="排序" id="order">
+</p>
+<table border="1" width="100%" id="tab1" >
+    <thead>
+    <tr>
+        <th>全选 <input type="checkbox" name="checkAll" id="checkAll"></th>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>年龄</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+	var form=document.getElementsByTagName("form")[0];
+	var tab=document.getElementById("tab1");
+	var sub=document.getElementById("submit");    //提交按钮
+	var checkedAll=document.getElementById("checkAll");      //全选框
+	var orderName=document.getElementById("orderName");
+	var orderBy=document.getElementById("orderBy");
+	var order=document.getElementById("order");
+	var arr=[];        //用于重绘时记录选中的tr
+	var tbs = tab.tBodies[0];
+	var checks=tab.getElementsByTagName('input');
+	//封装函数
+	function creat(){       //根据当前data数组 重绘表格内容
+		arr=[];     //清空arr,以便重新记录选中的信息
+		for (var i = 0; i < checks.length; i++) {     //遍历寻找勾选的tr，将其编号压入arr暂存
+			if (checks[i].checked==true) {
+				arr.push(checks[i].parentElement.nextElementSibling.innerHTML);//编号
+			}
+		}
+		tab.removeChild(tab.tBodies[0]);  //直接删掉tbody及所有内部tr，然后重绘
+		var tbody=document.createElement("tbody");  //新建一个tbody
+		tab.appendChild(tbody);   //将新tbody压入表格
+		for (var i = 0; i < data.length; i++) {   //循环data数组，数组中有多少数据，生成多少tr
+			var tr=document.createElement("tr");  //生成新tr
+			//新tr的背景色
+			if(i%2){            //新tr隔行变色,如果这是变色行
+				tr.style.backgroundColor="#eee";  //变色行
+				tr.onmouseout=function(){   //当变色行移出时，如果没有被选中，返回本色，如果选中了返回选中色
+					this.getElementsByTagName("input")[0].checked==true?this.style.backgroundColor="lightblue":this.style.backgroundColor="#eee"; //如果移开的时候它是被选中的，保持高亮，否则返回本色
+				}
+			}else{   //如果这不是变色行
+				tr.onmouseout=function(){  //非变色行移出时，如果没有被选中，返回白色，如果选中了返回选中色
+					this.getElementsByTagName("input")[0].checked==true?this.style.backgroundColor="lightblue":this.style.backgroundColor="";//如果移开的时候它是被选中的，保持高亮，否则返回本色
+				}
+			}
+			tr.onmouseover=function(){    //新tr鼠标移入高亮
+				this.style.backgroundColor="deepskyblue";
+			}
+			tr.onclick=function(){       //新tr鼠标点击
+				if(this.getElementsByTagName("input")[0].checked==true){ //如果勾选了,则取消勾选
+					this.cells[0].getElementsByTagName('input')[0].checked=false;//取消勾选
+				}else{               //如果没有勾选，勾选上
+					this.getElementsByTagName('input')[0].checked=true;//勾选上
+				}
+				ifAllChecked();//每次点击都判断是否全部勾选，函数内部会根据是否全部勾选的结果改变全选按钮
+			}
+			//新tr的内容
+			var td1=document.createElement("td");      //生成每一条的全选
+			var check=document.createElement("input");
+			check.type="checkbox";
+			
+			if (arr.indexOf(String(data[i].id))!=-1) { //每生成一条tr就判断它的id是否被暂存在了arr数组里面
+				check.checked=true;//如果arr数组里面有，说明重回前它是选中的，这一步将它选中，同时背景高亮
+				tr.style.backgroundColor="lightblue";//如果是选中的，高亮
+			}
+			check.onclick=function (event) {   //给每一条tr前面的全选按钮添加点击事件
+				ev=event||window.event;
+				ev.cancelBubble=true;
+				ifAllChecked();    //每次点击判断是否全选了
+			}
+			td1.appendChild(check);
+			tr.appendChild(td1);
+			
+			var td2=document.createElement("td");      //编号
+			td2.innerHTML=data[i].id;
+			tr.appendChild(td2);
+			
+			var td3=document.createElement("td");      //名字
+			td3.innerHTML=data[i].name;
+			tr.appendChild(td3);
+			
+			var td4=document.createElement("td");      //性别
+			td4.innerHTML=data[i].sex;
+			tr.appendChild(td4);
+			
+			var td5=document.createElement("td");      //年龄
+			td5.innerHTML=data[i].age;
+			tr.appendChild(td5);
+			
+			var td6=document.createElement("td");      //操作
+			var prev=document.createElement("button");  //上移
+			prev.innerHTML="上移";
+			prev.index=i;      //每次重绘时重排上移按钮的index，可以知道这是第几个上移即第几个data内对象，方便操纵对象
+			prev.onclick=function(event){   //给上移添加点击事件
+				ev=event||window.event;
+				ev.cancelBubble=true
+				if(this.parentNode.parentNode.previousElementSibling){   //如果这一行有上一个兄弟元素,改变data，重绘
+					data.splice(this.index-1,0,data.splice(this.index,1)[0]);   //操纵data数组。注意，splice返回的是一个数组所以这里要加【0】
+				}             //开始截取的位置是这个的上一个，其实不截取，剪掉这个一个替换到上一个的前面
+				creat();//上移下移之后都要根据操纵后的data重绘表格
+			}
+			td6.appendChild(prev);
+			
+			var next=document.createElement("button");  //下移
+			next.innerHTML="下移";
+			next.index=i;                //每次重绘时重排下移按钮的index
+			next.onclick=function(event){    //点击下移时
+				ev=event||window.event;
+				ev.cancelBubble=true;
+				if(this.parentNode.parentNode.nextElementSibling){   //如果这一行有下一个兄弟元素,下移
+					data.splice(this.index+1,0,data.splice(this.index,1)[0]);   //注意，splice返回的是一个数组所以这里要加【0】
+				}
+				creat();   //上移下移之后根据操纵后的data重绘表格
+			}
+			td6.appendChild(next);
+			
+			var remove=document.createElement("button");  //删除
+			remove.innerHTML="删除";
+			remove.index=i;     //每次重绘时重排删除按钮的index
+			remove.onclick=function(event){   //删除的点击事件，操纵data数组
+				ev=event||window.event;
+				ev.cancelBubble=true;
+				data.splice(this.index,1);    //从数组中删除这一个
+				creat();  //根据操纵后的data重绘表格
+			}
+			td6.appendChild(remove);
+			tr.appendChild(td6);
+			
+			tab.tBodies[0].appendChild(tr);   //将这条新生成的tr画入tbody
+		}
+		ifAllChecked();     //每次重绘表格后，都要根据当前有几个选中来改变全选按钮状态
+	}
+	function maxId(){      //寻找当前data数据中的最大id
+		var temp=-Infinity;
+		for (var i = 0; i < data.length; i++) {   //data有几条数据就循环几次
+			if(data[i].id>temp){
+				temp=data[i].id;
+			}
+		}
+		return temp;     //返回最大值
+	}
+	function ifAllChecked(){    //判断当前如果全部选中，勾上全选，如果没有则不勾选
+		var checks=tab.tBodies[0].getElementsByTagName('input');
+		for (var i = 0; i < checks.length; i++) {   //遍历表格中所有的全选按钮
+			if(checks[i].checked==false){     //一旦发现有没有选中的，立刻跳出函数，不执行后面的勾上全选
+				checkedAll.checked=false; 
+				return;
+			}
+		}
+		checkedAll.checked=true;     //如果循环结束走到这里，证明全部选中了，则勾上全选框
+	}
+	//封装函数结束
+	//初始化
+	creat();
+	//提交按钮点击事件
+	sub.onclick=function(){     //点击提交按钮
+		if(form.username.value==""){
+			alert("请输入姓名");
+		}else if(form.sex.value==""){
+			alert("请输入性别");
+		}else if(form.age.value==""){
+			alert("请输入年龄");
+		}else{          //正确提交，向data数组压入一个新对象
+			var newDataObj={};
+			newDataObj.id=maxId()+1;
+			newDataObj.name=form.username.value;
+			newDataObj.sex=form.sex.value;
+			newDataObj.age=form.age.value;
+			data.push(newDataObj);
+			creat();    //每次点击提交都要根据新data重绘表格
+		}
+	}
+	//点击全选按钮
+	checkedAll.onclick=function(){
+		var trs=tab.tBodies[0].getElementsByTagName("tr");    //为什么不能放在最上面动态获取？--因为tab.tBodies[0]不是动态的
+		var checks=tab.tBodies[0].getElementsByTagName('input');//tbody中所有的选框,动态方法，实时获取?为什么放到最上面就不能实时获取了？
+		if(this.checked==false){       //取消全选。因为内部机制是按钮的checked先变化，再进行判断,所以false代表想要清空所有选框
+			for (var i = 0; i < checks.length; i++) {    //清掉所有勾选
+				checks[i].checked=false;
+			}
+			for (var i = 0; i < data.length; i++) {    //重绘隔行变色。因为取消了全选的高亮，大家都要回到本色
+				if (i%2) {
+					trs[i].style.backgroundColor="#eee";
+				}else{
+					trs[i].style.backgroundColor="";
+				}
+			}
+		}else{      //如果想要全部选上，全部选上
+			for (var i = 0; i < checks.length; i++) {
+				checks[i].checked=true;
+				checks[i].parentElement.parentElement.style.backgroundColor="lightblue";//大家都变成高亮
+			}
+		}
+	}
+	//点击排序按钮
+	order.onclick=function(){    //sort排序,重绘
+		if(orderName.value==""){    //如果没写这两个信息，直接跳出函数
+			alert("请输入排序字段");
+			return;
+		}
+		if(orderBy.value==""){
+			alert("请输入排序方式");
+			return;
+		}
+		if(orderName.value=="id"){      //如果排序字段是 编号
+			if(orderBy.value=="asc"){   //如果升序
+				data.sort(function(a,b){    //这里的a、b是整个对象
+					return a.id-b.id;   
+				})
+			}else{                 //如果降序
+				data.sort(function(a,b){    //这里的a、b是整个对象，a一定在b前面
+					return b.id-a.id;
+				})
+			}
+		}else{        //如果排序字段是 年龄
+			if(orderBy.value=="asc"){   //如果升序
+				data.sort(function(a,b){    //这里的a、b是整个对象
+					return a.age-b.age;
+				})
+			}else{                 //如果降序
+				data.sort(function(a,b){    //这里的a、b是整个对象
+					return b.age-a.age;
+				})
+			}
+		}
+		creat();  //根据改变后的data重绘表格
+	}
+</script>
+</body>
+</html>
