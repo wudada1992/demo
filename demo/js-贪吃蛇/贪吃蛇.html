@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				margin: 0 auto;
+				width: 900px;
+				height: 900px;
+				border:  10px solid black;
+				border-radius: 30px;
+				position: relative;
+				background: #f1f1f1;
+			}
+			#box div{
+				position: absolute;
+				width: 90px;
+				height: 90px;
+				background: #c1c1c1;
+				box-shadow: 0 0 20px ;
+				border-radius: 20px;
+				margin: 5px;
+			}
+			#box div.head{
+				background-color:orangered;
+			}
+			#box div.foot{
+				background-color: #ccc;
+				box-shadow: none;
+			}
+			#box div.food{
+				/*border-radius: 50%;*/
+				background-color: #f1f1f1;
+				box-shadow: none;
+				background-size: 90px 90px;
+			}
+		</style>
+	</head>
+	<body>
+		玩法介绍：按↑↓←→键控制移动
+		<div id="box"></div>
+		<script type="text/javascript">
+			var box=document.getElementById("box");
+			var str="";             //用来放生成蛇的字符串
+			var timer;
+			var to=39;            //趋向   默认向右
+			var onoff=false;         //食物开关，false对应没有食物
+			var onoffKey=true;        //按键开关，防止1秒内按下多个按键导致的bug，true对应可以按键状态
+			var place=[];           //食物的位置
+			var num=0;            //已经吃到的果实个数
+			var imgNum=0;       //果实图片第几张
+			var arr=[            //用来存每一个div的left、top（先默认每个div大小为90+5+5=100px）
+				[0,0],            //第一个div是蛇尾     
+				[1,0],
+				[2,0]             //最后一个div是蛇头
+			]; 
+			//初始化
+			drow();
+			//封装函数
+			function drow(){             //画蛇和食物 
+				str="";
+				food();
+				for (var i = 0; i < arr.length; i++) {
+					if(i==0){
+						str+="<div class='foot' style='left:"+(arr[i][0]*100+5)+"px; top:"+(arr[i][1]*100+5)+"px;'></div>";
+					}else if(i==arr.length-1){
+						str+="<div class='head' style='left:"+(arr[i][0]*100+5)+"px; top:"+(arr[i][1]*100+5)+"px;'></div>";
+					}else{
+						str+="<div style='left:"+(arr[i][0]*100+5)+"px; top:"+(arr[i][1]*100+5)+"px;'></div>";
+					}
+				}
+				box.innerHTML=str;
+			}
+			function food(){               //画食物
+				if(onoff==false){
+					place=[Math.floor(Math.random()*9),Math.floor(Math.random()*9)];  //生成食物
+					imgNum=Math.ceil(Math.random()*6);
+					for (var i = 0; i < arr.length; i++) {       //检测食物有没有和蛇重合
+						if(String(arr[i])==String(place)){      //如果有再执行一边food
+							food();
+							return;
+						}
+					}
+					onoff=true;
+				}
+				str+="<div class='food' style='left:"+(place[0]*100+5)+"px; top:"+(place[1]*100+5)+"px;background-image:url(img/"+imgNum+".png);'></div>";
+			}
+			//定时器
+			timer=setInterval(function(){
+				if(to==39){               //向右
+					arr.push([arr[arr.length-1][0]+1,arr[arr.length-1][1]]);
+				}
+				if(to==40){               //向下
+					arr.push([arr[arr.length-1][0],arr[arr.length-1][1]+1]);
+				}
+				if(to==38){               //向上
+					arr.push([arr[arr.length-1][0],arr[arr.length-1][1]-1]);
+				}
+				if(to==37){               //向左
+					arr.push([arr[arr.length-1][0]-1,arr[arr.length-1][1]]);
+				}
+				for (var i = 0; i < arr.length-1; i++) {                 //检测蛇头有没有撞上身子
+					if(String(arr[i])==String(arr[arr.length-1])){
+						alert("游戏失败！");
+						clearInterval(timer);
+						return;
+					}
+				}
+				if(arr[arr.length-1][0]>8||arr[arr.length-1][0]<0||arr[arr.length-1][1]<0||arr[arr.length-1][1]>8){
+					alert("游戏失败！");
+					clearInterval(timer);
+					return;
+				}else{
+					if(String(arr[arr.length-1])==String(place)){     //如果下一步将要吃到果实
+						num++;
+						onoff=false;                 //改变开关，触发下一次food（）时重绘果实位置
+					}else{
+						arr.shift();
+					}
+					onoffKey=true;       //按键开关变成可以继续按键状态
+					drow();
+				}
+			},200);
+			//按键
+			document.onkeydown=function(event){
+				ev=event||window.event;
+				if(onoffKey==true){
+					onoffKey=false;
+					if(ev.keyCode==37&&to!=39){
+						to=37;
+					}else if(ev.keyCode==38&&to!=40){
+						to=38;
+					}else if(ev.keyCode==39&&to!=37){
+						to=39;
+					}else if(ev.keyCode==40&&to!=38){
+						to=40;
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

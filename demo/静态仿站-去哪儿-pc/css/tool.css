@@ -1,0 +1,208 @@
+.wrap{
+	width: 1200px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.heads{
+	overflow: hidden;
+	height: 45px;
+	border-bottom: 2px solid #00afc7;
+    margin-bottom: 15px;
+}
+.heads h3{
+	float: left;
+	font: 23px/45px "微软雅黑";
+    font-family: 'Hiragino Sans GB',"微软雅黑";
+    color: #00afc7;
+}
+.infos{
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	color: #666;
+	text-indent: 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.texts{
+	display: block;
+	font-size: 12px;
+	color: #aaa;
+	line-height: 18px;
+	padding-left: 10px;
+}
+.moneys{
+	display: block;
+	font-size: 20px;
+    font-family: arial;
+    font-weight: bold;
+    color: #f55;
+}
+.nomoneys{                  /*包含文字*/
+	display: block;
+	font-family: "微软雅黑";
+	color: #999;
+}
+.thline{
+	text-decoration: line-through;
+}
+/*左侧列表组合样式*/
+.list1s{                               /*整个大ul*/
+	float: left;
+	width: 177px;
+	overflow: hidden;
+}
+.list1s .item{                           /*每一个小li*/
+	border: 1px solid #e2f3f8;
+}
+.list1s .item header{                    /*头部*/
+	height: 30px;
+	background: #e2f3f8;
+	text-indent: 11px;
+	font: bold 14px/30px tahoma,arial,"Hiragino Sans GB",simsun,sans-serif;
+	color: #0286a0;
+}
+.list1s .item ul{                   /*内部小列表*/
+	overflow: hidden;
+	padding: 0 0  0 10px;
+}
+.list1s .item ul li{                    /*上下间距需要根据内容调整*/
+	float: left;
+	vertical-align: top;
+	
+}
+.list1s .item ul li a{
+	/*float: left;*/
+	color: #666666;
+}
+.list1s .item ul li a:hover{
+	color: #2fc7e8;
+}
+/*需要设置：
+  大ul下li(.item)的margin-bottpm和高度、
+ header的内容
+  小ul的padding-top、
+ 小ul下li的margin-right
+ 小ul下li a line-height
+  */
+/*list2s*/
+.list2s{
+	overflow: hidden;
+}
+.list2s li a{
+	float: left;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #eeeeee;
+}
+.list2s li a:hover{
+	border: 1px solid #00afc7;
+}
+/*蓝色标签*/
+.tag{
+	float: left;
+}
+.tag li{
+	float: left;
+	
+}
+.tag li a{
+	float: left;
+	height: 28px;
+	padding: 0 13px;
+	line-height: 28px;
+	font:bold 16px/28px "微软雅黑";
+	color: #3bb0d0;
+	background: #fff;
+}
+.tag li .hover{
+	color: #fff;
+	background: #3bb0d0;
+}
+/*需要设置:
+标签上下间隙*/
+.tag2{
+	float: left;
+	width:945px ;
+}
+.tag2 li{
+	float: left;
+	
+}
+.tag2 li a{
+	float: left;
+	height: 28px;
+	padding: 0 13px;
+	line-height: 28px;
+	font: 16px/28px "微软雅黑";
+	color: #666;
+	background: #fff;
+}
+.tag2 li .hover{
+	color: #fff;
+	background: #3bb0d0;
+}
+.tag2 li a:hover{
+	color: #fff;
+	background: #3bb0d0;
+}
+/*背景黑色条*/
+.bl_box{                              /*imgbox需要相对定位span*/
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 22px;
+	width: 100%;
+}
+.bl_box .bg{                   /*背景层span*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 22px;
+	width: 100%;
+	opacity: 0.5;
+	background: black;
+}
+.bl_box .tt{                     /*内容层span、可以设置字体大小*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 22px;
+	text-indent: 10px;
+	line-height: 22px;
+	color: white;
+	font-weight: bold;
+}
+/**/
+section{
+	overflow: hidden;
+}
+/*dest*/
+.dest_box{                        /*是个div 有需要的加border-left*/
+	float: left;
+	width: 455px;
+	height: 80px;
+}
+.dest_box header{
+	height: 24px;
+	font: bold 16px/24px "微软雅黑";
+	color: #666666;
+	text-indent: 7px;
+	padding-bottom: 6px;
+}
+.dest_box ul{
+	float: left;
+}
+.dest_box ul li{
+	float: left;
+	height: 28px;
+	width: 227px;
+	text-indent: 7px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.dest_box ul li .blue{
+	color: #00add1;
+}

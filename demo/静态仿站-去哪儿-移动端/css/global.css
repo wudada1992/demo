@@ -1,0 +1,115 @@
+/*html{
+	height: 100%;
+	overflow: hidden;
+}
+/*fontsize是108*/
+body{
+	/*height: 100%;*/
+	margin: 0;
+	/*overflow: auto;*/
+}
+/*.content{                    /*尝试改进老师的方法*/
+	/*overflow: auto;
+}*/
+/*head*/
+#head{
+	/*position: absolute;*/         /*为了兼容qq不支持fix，此处相对于document绝对定位*/
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 1.2222222222rem;
+	background:#fff url(../img/tb_bg.jpg) repeat-x;
+	border-bottom: 3px solid #c8c5d8;
+	z-index: 1;                            /*不写它会把头盖住*/
+}
+#head .ico_erwei{
+	float: left;
+	width: 1.2962962963rem;
+	height: 1.2037037037rem;
+	background: url(../img/ico-erwei.jpg) no-repeat 0.3703703704rem 0.3148148148rem;
+	background-size: 0.6296296296rem 0.6296296296rem;
+}
+#head .form{
+	float: left;
+	position: relative;
+	margin-top: 0.1666666667rem;
+	margin-left: 0.0740740741rem;     /*怎么让它的背景透着父级的背景*/
+}
+#head .search{
+	float: left;
+	border: 0.037037037037037rem solid #16a4b8;
+	width: 7.185185185185185rem;
+	height: 0.8333333333333333rem;
+	border-radius: 0.1018518518518519rem;
+	background: none;
+}
+#head .ico_search{
+	position: absolute;
+	left: 0.2962962962962963rem;
+	top: 0.2314814814814815rem;
+	width: 0.4074074074074074rem;
+	height: 0.4074074074074074rem;
+	background: url(../img/ico-search.jpg) no-repeat;
+	background-size: 100%;
+}
+#head .search_hod{
+	position: absolute;
+	left: 1.824074074074074rem;
+	top: 0.1851851851851852rem;
+	width:4.277777777777778rem;
+	height: 0.4444444444444444rem;
+	background: url(../img/ico-hod.jpg) no-repeat;
+	background-size: 100%;
+}
+#head .mes{
+	float: right;
+	width: 1.296296296296296rem;
+	height: 1.2037037037rem;
+	background: url(../img/ico-mes.jpg) no-repeat 0.3703703704rem 0.3148148148rem;
+	background-size: 0.6666666666666667rem 0.6296296296296296rem;
+}
+/*content*/
+.content{
+	margin-top:  1.25rem;
+	margin-bottom: 1.462962962962963rem;
+}
+/*foot*/
+#foot{
+	/*position: absolute;*/
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1.462962963rem;
+	border-top: 0.0185185185185185rem solid #bbb;
+	background: #fff;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction:row;
+	justify-content:space-around;
+}
+#foot a{
+	width: 1.518518518518519rem;
+	height: 1.722222222222222rem;
+}
+#foot .home{
+	background: url(../img/foot-home.png) no-repeat;
+	background-size:100%;
+}
+#foot .bord{
+	background: url(../img/foot-bord.png) no-repeat;
+	background-size:100%;
+}
+#foot .fond{
+	background: url(../img/foot-fond.png) no-repeat;
+	background-size:100%;
+}
+#foot .ser{
+	background: url(../img/foot-ser.png) no-repeat;
+	background-size:100%;
+}
+#foot .my{
+	background: url(../img/foot-my.png) no-repeat;
+	background-size:100%;
+}

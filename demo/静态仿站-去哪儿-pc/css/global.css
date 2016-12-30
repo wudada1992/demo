@@ -1,0 +1,90 @@
+body{
+	font: 12px tahoma,arial,"Hiragino Sans GB",simsun,sans-serif;
+}
+/*head*/
+#head{
+	height: 73px;
+	border-bottom: 2px solid #00afc7;
+}
+#head h1{
+	float: left;
+}
+#head h1 a{
+	display: block;
+	height: 0;
+	width: 128px;
+	padding-top: 73px;
+	overflow: hidden;
+	background: url(../img/logo.gif) no-repeat ;
+}
+#head .top_bar{
+	float: right;
+	height: 28px;
+}
+#head .top_bar li{
+	float: left;
+	height: 12px;
+	margin: 8px 0;
+	padding: 0 10px;
+	background: url(../img/line.gif) no-repeat right bottom;
+}
+#head .top_bar li a{
+	float: left;
+	height: 12px;
+	color: #666666;
+}
+#head .top_bar .li_1{
+	color: #000000;
+	line-height: 12px;
+}
+#head .top_bar .li_1 a{
+	padding: 0 5px;
+	color: #0084bb;
+	line-height: 12px;
+}
+#head .top_bar .li_1 .teshu{
+	padding: 0 0 0 5px;
+}
+#head .top_bar .li_1 span{
+	float: left;
+}
+#head .top_bar .li_last{
+	padding-right:0 ;
+	background: none;
+}
+#head .title{
+	float: left;
+	height: 32px;
+	padding: 13px 0 0 10px;
+	width: 900px;        /*兼容ie6*/
+}
+#head .title li{
+	float: left;
+}
+#head .title li a:hover{
+	color: #3c5b95;
+}
+#head .title li a{
+	float: left;
+	height: 32px;
+	padding: 0 10px 0;
+	color: #3c3c3c;
+	font: bold 16px/32px "微软雅黑";
+}
+#head .title .li_1 a{
+	color: #3c5b95;
+}
+#head .title .ico{
+	position: relative;
+}
+#head .title .ico img{
+	position: absolute;
+	top: -13px;
+	left: 2px;
+}
+#head .right{
+	float: right;
+	width:137px;
+	height: 32px;
+	padding-top: 13px;
+}

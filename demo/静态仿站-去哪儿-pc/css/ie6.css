@@ -1,0 +1,91 @@
+.content .banner .con .check .way input{
+	margin-top:8px ;
+}
+.submit{
+	display: none;
+}
+.buy .btm{
+	margin-top:-20px ;
+}
+.holiday .list2 li .bt_l{
+	display: inline;
+}
+section{
+	zoom: 1;
+}
+.travel .heads .more{
+	padding-top: 17px;
+}
+.travel .dest_box{
+	width: 440px;
+	display: inline;
+	overflow: hidden;
+	zoom: 1;
+}
+.travel .floo{
+	overflow: hidden;
+	zoom: 1;
+}
+.list1s .item{
+	zoom: 1;
+}
+.list1s .item ul{
+	zoom: 1;
+}
+.list1s .item header{
+}
+.list1s .item ul li{                    /*上下间距需要根据内容调整*/
+	float: left;
+}
+.list1s .item ul li a{
+	float: left;
+	white-space: nowrap;
+}
+.tags dl{
+	overflow: hidden;
+	zoom: 1;
+}
+.tags dl dd{
+	white-space: nowrap;
+}
+.holiday .list2 li .info_box .bg{
+	filter:alpha(opacity=60); 
+}
+.bl_box .bg{
+	filter: alpha(opacity=50);
+}
+.main_left .today .list1 .bt{
+	height: 34px;
+	line-height: 34px;
+}
+.main_left .today .list1 li a .mid{
+	height: 90px;
+}
+.ad_box1 .controls li {
+	display: inline;
+}
+.travel .little_box{
+	width: 440px;
+}
+.travel .little_box ul li{
+	width: 220px;
+}
+.ico3 ul li{
+	width: 112px;
+}
+.fix{
+	position: absolute;
+	left:0;
+	top:expression(eval(document.documentElement.scrollTop));
+	                                                
+}
+
+.list2s{
+	zoom: 1;
+	/*float: right;*/
+}
+#content .list2s li{
+	zoom: 1;
+	display: inline;
+	margin-left: 12px;
+}

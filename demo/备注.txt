@@ -1,0 +1,52 @@
+--------------------------git链接github------------------------------------
+1. git 安装在本地的工具
+2. github是一个网站 存放代码
+
+本地git要连接到github网站 
+
+第一步，打开git命令面板，设置贡献者：
+	git config --global  user.email "你的邮箱"
+	git config --global  user.name "你的用户名"
+
+第二步，生成SSh
+	ssh-keygen -t rsa -C "注册邮箱"
+
+	一路回车
+
+	找路径 找到文件夹.ssh下，会有两个文件
+	1. id_rsa      私钥
+	2. id_rsa.pub  公钥
+
+第三步，找github中添加ssh项
+		参考截图
+
+第四步，测试是否连接成功
+		打开git命令面板
+			ssh -T git@github.com
+
+
+--------------------------提交代码------------------------------------
+第一次的时候：
+
+1. 在gihub上建立仓库
+	参考截图
+2. 把本地的文件上传到仓库中
+	a. 在本地文件中打开git命令行
+	b. 在命令中敲 git init初始 目的是让这个目录归git所管理
+	c. git add <file>
+		<file>  文件路径
+		 . 所有的文件
+	d. git commit -m "提交日志"
+	e. 连接远程地址  git remote add origin 你自己的github地址(这里建议使用ssh地址，因为我用https地址的时候每一次提交都需要输入github用户名和密码)
+	f. 本地文件推送到远程仓库 git push -u origin master
+
+继续改本地文件
+	1. git add <file>
+	2. git commit -m "提交日志"
+	3. git push
+
+
+--------------------------克隆仓库到本地------------------------------------
+	git clone 仓库地址
+
+

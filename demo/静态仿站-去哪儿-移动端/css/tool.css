@@ -1,0 +1,113 @@
+/*重用工具*/
+.clearfix:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+/*小标题重用*/
+.heads{
+	position: relative;
+	height:0.5555555555555556rem ;
+	margin: 0.3425925925925926rem 0;
+	border-left: 0.1666666666666667rem solid #00c2c8;
+}
+.heads h3{
+	float: left;
+	height: 100%;
+	line-height: 0.5555555555555556rem;
+	text-indent: 0.3240740740740741rem;
+	font-size: 0.4444444444444444rem;
+	color: #2f2f2f;
+}
+.heads .more{
+	float: right;
+	width: ;
+	margin-right: 0.2777777777777778rem;
+	height: 100%;
+	line-height: 0.5555555555555556rem;
+	font-size: 0.3703703703703704rem;
+	color: #878787;
+	font-weight: bold;
+}
+/*酒店块重用*/
+.hotels{
+	position: relative;
+	display: block;
+	margin-left: 2.972222222222222rem;
+	border-bottom: 0.0185185185185185rem solid #eee;
+	padding: 0.1203703703703704rem 0.3240740740740741rem 0 0.3240740740740741rem;
+}
+.hotels .head{
+	display: block;
+	height: 0.6944444444444444rem;
+	line-height: 0.6944444444444444rem;
+	font-size: 0.4074074074074074rem;
+	color: #343434;
+	font-weight: bold;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.hotels .sub{
+	display: block;
+	height: 0.5925925925925926rem;
+	line-height: 0.5925925925925926rem;
+	font-size: 0.3148148148148148rem;
+	color: #8c8c8c;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.hotels .sub .score{
+	color: #36a7b5;
+}
+.hotels .money{
+	display: block;
+	height: 0.6388888888888889rem;
+}
+.hotels .money .lt{
+	float: left;
+	height: 0.3796296296296296rem;
+	line-height:  0.3796296296296296rem;
+	width: 1.185185185185185rem;
+	border: 0.0185185185185185rem solid #f55b65;
+	margin-top: 0.1111111111111111rem;
+	border-radius: 0.0462962962962963rem;
+	text-align: center;
+	color: #f55b65;
+	font-size: 0.2592592592592593rem;
+}
+.hotels .money .rt{
+	float: right;
+	height: 0.3796296296296296rem;
+	line-height:  0.3796296296296296rem;
+	color: #828282;
+	font-size: 0.3148148148148148rem;
+}
+.hotels .money .rt .num{
+	color: #ff6000;
+	font-size: 0.3703703703703704rem;
+	font-weight: bold;
+}
+.hotels .money .rt .num span{
+	color: #ff6000;
+	font-size: 0.3148148148148148rem;
+	font-weight: 100;
+}
+.hotels .local{
+	display: block;
+	height:0.7407407407407407rem ;
+	line-height: 0.7407407407407407rem;
+	color: #898989;
+	font-size: 0.3148148148148148rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.hotels .im{
+	position: absolute;
+	left: -2.972222222222222rem;
+	top: 0;
+	width: 2.972222222222222rem;
+	height: 100%;
+}

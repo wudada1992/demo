@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				overflow: hidden;
+			}
+			/*坦克1号*/
+		    #box{
+		    	width:120px;
+		    	height:100px;
+		    	background-color:#777;
+		    	position: absolute;
+		    	left: 800px;
+		    	top: 400px;
+		    	transition: transform 0.1s;
+		    }
+		    #box .pao{
+		    	position: absolute;
+		    	width: 130px;
+		    	height: 10px;
+		    	background: black;
+		    	left: 50px;
+		    	top:45px ;
+		    	z-index: 2;
+		    }
+		    .bull{                        /*因为全局，所以不是#box下的*/
+		    	width: 10px;
+		    	height: 10px;
+		    	background: orange;
+		    	border-radius: 50%;
+		    	position: absolute;
+		    	z-index: 1;
+		    }
+		    #box .head{
+		    	position: absolute;
+		    	width: 50px;
+		    	height: 50px;
+		    	background: #B4B4B4;
+		    	left: 18px;
+		    	top: 25px;
+		    	border-radius:3px;
+		    	border-top-right-radius:25px;
+		    	border-bottom-right-radius:25px;
+		    	z-index: 3;
+		    }
+		    #box .footL{
+		    	width: 160px;
+		    	height: 30px;
+		    	background:#282828;
+		    	position: absolute;
+		    	left: -20px;
+		    	border-radius:5px;
+		    	top: -20px;
+		    }
+		    #box .footR{
+		    	width: 160px;
+		    	height: 30px;
+		    	background:#282828;
+		    	position: absolute;
+		    	left: -20px;
+		    	border-radius:5px;
+		    	bottom: -20px;
+		    }
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div class="pao"></div>
+			<div class="head"></div>
+			<div class="footL"></div>
+			<div class="footR"></div>
+		</div>
+		<script>
+			var box = document.getElementById("box");
+			var pao=box.getElementsByClassName("pao")[0];
+			var arr=[];      //存按下的键
+			var face="r";     //坦克面向，用于解决arr为空时发射子弹朝向。
+			var fireOnOff=false;    //false对应开火定时器没有开启
+			var timerF;     //开火定时器
+			var rotate=0;   //记录坦克目前角度 初始向右为0
+			function fire(){      //生成子弹、发射子弹、炮管后坐力、清除子弹和定时器
+				var bull=document.createElement("div");
+				bull.className="bull";
+				document.body.appendChild(bull);
+				if(face=="r"){
+					bull.style.left=box.offsetLeft+150+"px";
+					bull.style.top=box.offsetTop+45+"px";
+					var timer1=setInterval(function(){
+						bull.style.left=parseFloat(bull.style.left)+10+"px";
+					},10);
+				}
+				if(face=="l"){
+					bull.style.left=box.offsetLeft-50+"px";
+					bull.style.top=box.offsetTop+45+"px";
+					var timer1=setInterval(function(){
+						bull.style.left=parseFloat(bull.style.left)-10+"px";
+					},10);
+				}
+				if(face=="t"){
+					bull.style.left=box.offsetLeft+55+"px";
+					bull.style.top=box.offsetTop-50+"px";
+					var timer1=setInterval(function(){
+						bull.style.top=parseFloat(bull.style.top)-10+"px";
+					},10);
+				}
+				if(face=="b"){
+					bull.style.left=box.offsetLeft+55+"px";
+					bull.style.top=box.offsetTop+150+"px";
+					var timer1=setInterval(function(){
+						bull.style.top=parseFloat(bull.style.top)+10+"px";
+					},10);
+				}
+				pao.style.transition=0.05+"s";    //炮管后坐力
+				pao.style.left=20+"px";
+				setTimeout(function(){
+					pao.style.transition=0.5+"s";
+					pao.style.left=50+"px";
+				},100);
+				setTimeout(function(){        //一段时间之后删掉子弹，清掉定时器
+					clearInterval(timer1);
+					document.body.removeChild(bull);
+				},2000);
+			}
+			setInterval(function(){
+				if(arr[arr.length-1] == "l"){
+					box.style.left = box.offsetLeft - 2 + "px";
+					if(face=="t"){    //上→左
+						rotate-=90;
+					}
+					if(face=="r"){    //右→左
+						rotate+=180;
+					}
+					if(face=="b"){    //下→左
+						rotate+=90;
+					}
+					face="l";
+				}
+				if(arr[arr.length-1]== "t"){
+					box.style.top = box.offsetTop - 2 + "px";
+					if(face=="l"){    //左→上
+						rotate+=90;
+					}
+					if(face=="r"){    //右→上
+						rotate-=90;
+					}
+					if(face=="b"){    //下→上
+						rotate+=180;
+					}
+					face="t";
+				}
+				if(arr[arr.length-1] == "r"){
+					box.style.left = box.offsetLeft + 2 + "px";
+					if(face=="t"){    //上→右
+						rotate+=90;
+					}
+					if(face=="l"){    //左→右
+						rotate+=180;
+					}
+					if(face=="b"){    //下→右
+						rotate-=90;
+					}
+					face="r";
+				}
+				if(arr[arr.length-1] == "b"){
+					box.style.top = box.offsetTop + 2 + "px";
+					if(face=="r"){    //右→下
+						rotate+=90;
+					}
+					if(face=="l"){    //左→下
+						rotate-=90;
+					}
+					if(face=="t"){    //上→下
+						rotate+=180;
+					}
+					face="b";
+				}
+				box.style.transform="rotate("+rotate+"deg)";
+			},1)
+			document.onkeydown = function(e){//确定方向                 wasd可以，但是ad不能同时按；小键盘4568的8有问题;上下左右的右有问题但是左右可以同时按;小键盘1235可以，但是13不能同时按
+				if( e.keyCode == 97 ){//左A65     小键盘4 100        小键盘1   97
+					if(arr.indexOf("l")==-1)arr.push("l");
+				}
+				if( e.keyCode == 101 ){//上W87     小键盘8 104      小键盘5   101
+					if(arr.indexOf("t")==-1)arr.push("t");    //如果数组中没有“t”,加入“t”
+				}
+				if( e.keyCode == 99 ){//右D68     小键盘6 102         小键盘3    99
+					if(arr.indexOf("r")==-1)arr.push("r");
+				}
+				if( e.keyCode == 98 ){//下S83      小键盘5 101         小键盘2    98
+					if(arr.indexOf("b")==-1)arr.push("b");
+				}
+				if(e.keyCode==32){   //空格开火
+					if(fireOnOff==false){
+						fire();   //轻按下立即发射一颗，防止200毫秒内抬起空格清掉定时器导致一颗也不发
+						timerF=setInterval(fire,200); 
+						fireOnOff=true;
+					}
+				}
+			}
+			document.onkeyup = function(e){
+				if(e.keyCode==97&&arr.indexOf("l")!=-1){//抬起左，如果数组中有“l”，删掉“l”
+					var num=arr.indexOf("l");
+					arr.splice(num,1);
+				}
+				if(e.keyCode==101&&arr.indexOf("t")!=-1){     
+					var num=arr.indexOf("t");
+					arr.splice(num,1);
+				}
+				if(e.keyCode==99&&arr.indexOf("r")!=-1){     
+					var num=arr.indexOf("r");
+					arr.splice(num,1);
+				}
+				if(e.keyCode==98&&arr.indexOf("b")!=-1){     
+					var num=arr.indexOf("b");
+					arr.splice(num,1);
+				}
+				if(e.keyCode==32){
+					clearInterval(timerF);
+					fireOnOff=false;
+				}
+			}
+			
+		</script>
+		玩法介绍：小键盘1,2,3,5控制移动，空格发射子弹
+	</body>
+</html>
+<!--
+解决问题：
+	①老师数组法解决按下两个键抬起一个键的bug
+	②解决方向右键的bug：改用小键盘1235
+	③解决按住空格再走动会停止发射子弹 （开定时器发射炮弹）
+	④解决了傻转270度转回去
+
+-->
