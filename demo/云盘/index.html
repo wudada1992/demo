@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>秒味云盘</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/demo.css"/>
+	</head>
+	<body onselectstart="return false">
+		<div id="wrap">
+			<header id="head">
+				<h1 id="logo">
+					<a href="javascript:;" id="logo_bg">妙味课堂</a>
+				</h1>
+				<div class="right clearfix">
+					<a  href="javascript:;" id="userInfo">
+						<img src="img/me.jpg" alt="" id="userImg"/>
+						<i></i>
+					</a>
+					<a href="javascript:;" id="set">
+						<i></i>
+					</a>
+				</div>
+				<div id="fullTip" class="delay">
+					<i></i>
+					<span>请选择文件</span>
+				</div>
+			</header>
+			<div id="bar">
+				<div class="left">
+					<a href="javascript:;" class="btn" id="download">
+						<i></i>
+						下载
+					</a>
+					<a href="javascript:;" class="btn" id="share">
+						<i></i>
+						分享
+					</a>
+					<a href="javascript:;" class="btn" id="move">
+						<i></i>
+						移动到
+					</a>
+					<a href="javascript:;" class="btn" id="rename">
+						<i></i>
+						重命名
+					</a>
+					<a href="javascript:;" class="btn" id="delete1">
+						<i></i>
+						删除
+					</a>
+					<a href="javascript:;" class="btn" id="creatnew">
+						<i></i>
+						新建文件夹
+					</a>
+					<a href="javascript:;" class="tool" id="refresh">
+						<i></i>
+					</a>
+				</div>
+				<div class="right">
+					<a href="javascript:;" class="tool" id="resetView">
+						<i></i>
+					</a>
+					<a href="javascript:;" class="tool" id="resetSort">
+						<i></i>
+						<i></i>
+						<span class="sort_list">
+							<span href="javascript:;" class="timer">
+								<i></i>
+								按时间排序
+							</span>
+							<span href="javascript:;" class="letter">
+								<i></i>
+								按字母排序
+							</span>
+							<span class="white_line"></span>
+						</span>
+					</a>
+				</div>
+			</div>
+			<div id="wrap_main">
+				<aside class="tree" id="tree"></aside>
+				<div id="content">
+					<div id="bread"></div>
+					<div id="files"></div>
+				</div>
+			</div>
+		</div>
+		<script src="js/drag（面向对象拖拽）.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/dialog（面向对象弹窗）.js"></script>
+		<script src="js/data（数据）.js"></script>   <!--数据-->
+		<script src="js/handleData（操纵数据）.js"></script>  <!--操作数据的函数-->
+		<script src="js/tools（工具）.js"></script>  <!--生成页面的函数-->
+		<script src="js/index.js"></script>    <!--主函数-->
+	</body>
+</html>
