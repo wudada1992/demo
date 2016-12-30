@@ -1,0 +1,286 @@
+body{
+	font: 12px arial;
+}
+/*#head*/
+/*topbar*/
+.topbar{
+	height: 50px;
+	background: #323436;
+}
+.topbar .logo_box{
+	float: left;
+	width: 130px;
+	height: 0;
+	padding-top: 50px;
+	overflow: hidden;
+	background: url(../img/logo.png) no-repeat;
+}
+.topbar .tag2{
+	display: none;
+	margin-left: 25px;
+}
+.topbar .tag{
+	float: left;
+	height: 50px;
+}
+.topbar .tag a{
+	float: left;
+	height: 22px;
+	margin: 14px 0 14px 40px;
+	line-height: 22px;
+	font-size: 12px;
+	color: #8c8c8c;
+}
+.topbar .tag .more{
+	padding-right: 17px;
+	background: url(../img/ico1.png) no-repeat right 10px;
+}
+.topbar .rt{
+	float: right;
+	height: 32px;
+	margin-top: 10px;
+}
+.topbar .rt .seach{
+	float: left;
+	width: 28px;
+	height: 32px;
+	margin-right:21px ;
+	background: url(../img/seach.png) no-repeat 7px 8px;
+}
+.topbar .rt .ent{
+	float: left;
+	height: 14px;
+	padding: 8px 20px;
+	background: #505050;
+	font-size: 12px;
+	color: #94ac94;
+	line-height: 14px;
+}
+.topbar .rt .join{
+	float: left;
+	height: 14px;
+	padding: 8px 20px;
+	background: #6bc30d;
+	font-size: 12px;
+	color: #fff9b5;
+	line-height: 14px;
+}
+/*banner*/
+.banner{
+	height: 200px;
+	background: url(../img/banner.png) repeat-x;
+}
+.banner .wrap1{
+	width: 430px;
+	margin: 0 auto;
+	padding-top: 40px;
+}
+.banner .time{
+	height: 40px;
+	width: 100%;
+	display: flex;
+}
+.banner .time .mod{
+	border-right: 1px solid #385b72;
+	flex-direction:row;
+	width: 25%;
+	box-sizing: border-box;
+	text-align: center;
+	font-size: 12px;
+	color: #729cb7;
+	line-height: 64px;
+}
+.banner .time .mod:last-of-type{
+	border: 0;
+}
+.banner .time .mod span{
+	font-size: 40px;
+	line-height: 40px;
+	color: #00ffea;
+	font-family:arial;
+	margin-right: -6px;
+}
+.banner .sub{
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	color: #729cb7;
+	margin-bottom: 10px;
+}
+.banner .but{
+	display: flex;
+	width: 100%;
+	height: 30px;
+	justify-content: center;
+}
+.banner .but a{
+	display: block;
+	line-height: 30px;
+	width: 120px;
+	height: 100%;
+	box-sizing: border-box;
+	text-align: center;
+}
+.banner .but a:first-of-type{
+	color: #fff;
+	background: #00b4de;
+}
+.banner .but a:last-of-type{
+	color: #758e9d;
+	background: #486d7f;
+}
+/*tag*/
+.tagt{
+	background: #f7f8f8;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+	position: relative;
+}
+.tagt .wrap{
+	height: 40px;
+	padding: 10px 0;
+}
+.tagt .flo{
+	float: left;
+}
+.tagt .flo a{
+	float: left;
+	width: 126px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	color: #535353;
+}
+.tagt .lt{
+	display: inline-block;
+	width: 12px;
+	height: 18px;
+	margin-right: 6px;
+	position: relative;
+	top: 4px;
+}
+.tagt .flo a:nth-of-type(1){
+	background: #edeeee;
+	box-shadow:inset 0 1px 1px rgba(0,0,0,0.11);
+}
+.tagt .flo a:nth-of-type(2) .lt{
+	background: url(../img/tag1.png) no-repeat;
+}
+.tagt .flo a:nth-of-type(3) .lt{
+	background: url(../img/tag2.png) no-repeat;
+}
+.tagt .flo a:nth-of-type(4) .lt{
+	background: url(../img/tag3.png) no-repeat;
+}
+.tagt .flo a .rt{
+	display: inline-block;
+	margin-left: 6px;
+	width: 9px;
+	height: 5px;
+	background: url(../img/ico2.png) no-repeat;
+	position: relative;
+	top: -2px;
+}
+.tagt .color{
+	width: 100px;
+}
+.tagt .mes{
+	float: left;
+	width: 594px;
+	height: 40px;
+	line-height: 40px;
+	margin-left: 34px;
+}
+.tagt .mes .ltt{
+	float: left;
+	height: 40px;
+}
+.tagt .mes .info{
+	float: left;
+	height: 40px;
+	margin-left: 12px;
+	color: #929292;
+}
+.tagt .mes .info .green{
+	float: left;
+	height: 40px;
+	color: #1f8902;
+	max-width: 160px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.tagt .mes .info span{
+	float: left;
+	height: 40px;
+}
+.tagt .mes .lt{
+	float: left;
+	top: 10px;
+	background: url(../img/tag4.png) no-repeat;
+}
+.tag .flo{
+	float: left;
+}
+.tagt .rtt{
+	float: right;
+	width: 7px;
+	height: 40px;
+}
+.tagt .rtt .top{
+	transform: rotate(180deg);
+	display: block;
+	width: 7px;
+	height: 5px;
+	margin-top: 12px;
+	background: url(../img/ico1.png) no-repeat;
+}
+.tagt .rtt .bot{
+	display: block;
+	width: 7px;
+	height: 5px;
+	margin-top: 10px;
+	background: url(../img/ico1.png) no-repeat;
+}
+/*foot*/
+#foot{
+	height: 100px;
+	background: #222324;
+}
+#foot .wrap{
+	padding-top: 20px;
+}
+#foot .top{
+	height: 20px;
+	line-height: 20px;
+	color: #cecece;
+	margin-bottom: 22px;
+}
+#foot .top .tag{
+	float: left;
+	margin-right: 40px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+	color: #cecece;
+}
+#foot .top .foot1{
+	background: url(../img/foot1.png) no-repeat;
+	width: 22px;
+}
+#foot .top .qun{
+	float: left;
+	height: 20px;
+	margin-right: 16px;
+	color: #8e8e8e;
+}
+#foot .top .footr{
+	float: right;
+}
+#foot .bottom{
+	height: 22px;
+	line-height: 22px;
+	color: #8e8e8e;
+}
+#foot .bottom .www{
+	color: #62ca18;
+}

@@ -1,0 +1,51 @@
+@media screen and (max-width: 1880px){
+	.wrap {
+	    width: 1180px;
+	}
+	.design .dow{
+		display: none;
+	}
+}
+@media screen and (max-width:1250px) {
+	.wrap {
+	    width: 880px;
+	}
+	.tagt .mes{
+		display: none;
+	}
+	.design{
+		display: none;
+	}
+	.company .con{
+		padding-left: 2px;
+	}
+	.company .con .item{
+		float: left;
+		width: 125px;
+		height: 90px;
+		margin: 0 0 10px 18px;
+	}
+	.topbar .tag2{
+		display: initial;
+		float: left;
+		margin-left: 22px;
+	}
+	.topbar .tag{
+		display: none;
+		margin-left: 25px;
+	}
+}
+@media only screen and (max-width: 950px) {
+	.wrap{
+		width: 580px;
+	}
+	.company .con{
+		padding-left: 7px;
+	}
+	.company .con .item{
+		float: left;
+		width: 125px;
+		height: 90px;
+		margin: 0 0 10px 13px;
+	}
+}

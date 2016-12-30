@@ -1,0 +1,275 @@
+/*content*/
+.content{
+	background: #f1f1f1;
+	overflow: hidden;
+}
+.content .section{
+	margin-bottom: 40px;
+	background: #fff;
+}
+/*main*/
+.fix{                /*固定条*/
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 40px;
+	height: 81px;
+}
+.fix .top{
+	display: block;
+	width: 40px;
+	height: 40px;
+	border-bottom: 1px solid #f1f1f1;
+	background: url(../img/fix1.png) no-repeat;
+}
+.fix .bot{
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: url(../img/fix2.png) no-repeat;
+}
+#content .main{
+	display: flex;
+	padding-top: 5px;
+	justify-content: space-between;
+	align-content: space-between;
+	flex-wrap: wrap;
+	background: #f1f1f1;
+}
+.main .item{
+	width: 280px;
+	height: 270px;
+	margin-top: 45px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	background: #fff;
+}
+.main .first{
+	width: 580px;
+}
+.main .item .info{
+	height: 20px;
+	border-bottom: 1px solid #f2f2f2;
+	line-height: 20px;
+	padding: 12px 20px 11px;
+	color: #BFBFBF;
+}
+.main .item span{
+	float: left;
+	margin-right: 15px;
+	text-indent: 25px;
+}
+.main .item .look{
+	background: url(../img/look.png) no-repeat;
+}
+.main .item .mes{
+	background: url(../img/mes.png) no-repeat;
+}
+.main .item .like{
+	background: url(../img/like.png) no-repeat;
+}
+.main .item .use{
+	padding: 12px 20px 11px;
+	height: 22px;
+}
+.main .item .user{
+	margin-right: 18px;
+}
+.main .item .name{
+    max-width: 50px;
+    line-height: 24px;
+    color: #C0C0C0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.main .item .sub{
+	margin-left: 10px;
+	line-height: 24px;
+    color: #C0C0C0;
+}
+.main .item .mo{
+	float: right;
+}
+/*page*/
+#content .page{
+	height: 36px;
+	background: none;
+}
+.page a{
+	float: left;
+	width: 36px;
+	height: 36px;
+	background: #FFF;
+	line-height: 36px;
+	text-align: center;
+	color: #a9a9a9;
+	margin-right: 5px;
+}
+.page .click{
+	background: #70ca10;
+    color: #fff;
+}
+.page .mid{
+	background: none;
+}
+.page .rit2{
+	background: url(../img/rit2.png) no-repeat;
+}
+/*design*/
+#content .design{
+	background: #f1f1f1;
+}
+.design>div{
+	float: left;
+	width: 580px;
+	height: 300px;
+}
+.design .heads .rt{
+	width: 99px;
+}
+
+.design .con{
+	padding: 20px;
+	overflow: hidden;
+}
+.design .er{
+	margin-right: 20px;
+	background: #fff;
+}
+.design .er .con .item{
+	float: left;
+	width: 270px;
+	height: 50px;
+	margin-bottom: 20px;
+}
+.design .er .con .item .img_box{
+	float: left;
+	width: 50px;
+	height: 50px;
+}
+.design .er .con .item .info{
+	float: left;
+	margin-top: 3px;
+	margin-left: 15px;
+}
+.design .er .con .item .name{
+	font-size: 14px;
+	color: #696969;
+}
+.design .er .con .item .sub{
+	margin-top: 3px;
+	color: #aaaaaa;
+}
+/*mod*/
+.design .mod{
+	width: 580px;
+	background: #fff;
+}
+.design .mod .btn{
+	float: right;
+}
+.design .mod .btn a{
+	float: left;
+	height: 60px;
+	width: 70px;
+	font-size: 30px;
+	color: #7e7e7e;
+	border-left: 1px solid #f1f1f1;
+}
+.design .mod .btn .lft{
+	background: url(../img/lft.png) no-repeat;
+}
+.design .mod .btn .rit{
+	background: url(../img/rit.png) no-repeat;
+}
+.design .mod .img_box{
+	float: left;
+	width: 280px;
+	height: 180px;
+}
+.design .mod .info{
+	float: left;
+	margin: 10px 0 0 20px;
+	width: 230px;
+}
+.design .mod .name{
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	color: #515050;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.design .mod .time{
+	color: #B3B3B3;
+	overflow: hidden;
+}
+.design .mod .text{
+	margin-top:15px ;
+	color: #7d7d7d;
+	line-height: 24px;
+	height: 100px;
+	overflow: hidden;
+}
+/*dow*/
+.design .dow{
+	float: left;
+	width: 280px;
+	height: 300px;
+	margin-left: 20px;
+	background: #fff;
+}
+.design .dow .info{
+	width: 230px;
+	padding: 25px;
+}
+.design .dow .info a{
+	font-size: 16px;
+	color: #535353;
+}
+.design .dow .info p{
+	margin-top: 30px;
+	color: #939292;
+	line-height: 20px;
+}
+/*company*/
+.company .heads .rt{
+	width: 210px;
+}
+.company .con{
+	padding: 20px;
+	padding-left: 0;
+}
+.company .con .item{
+	float: left;
+	width: 125px;
+	height: 90px;
+	margin: 0 0 10px 20px;
+}
+.company .con .item:nth-of-type(1){
+	background: url(../img/company1.png) no-repeat;
+}
+.company .con .item:nth-of-type(2){
+	background: url(../img/company2.png) no-repeat;
+}
+.company .con .item:nth-of-type(3){
+	background: url(../img/company3.png) no-repeat;
+}
+.company .con .item:nth-of-type(4){
+	background: url(../img/company4.png) no-repeat;
+}
+.company .con .item:nth-of-type(5){
+	background: url(../img/company5.png) no-repeat;
+}
+.company .con .item:nth-of-type(6){
+	background: url(../img/company6.png) no-repeat;
+}
+.company .con .item:nth-of-type(7){
+	background: url(../img/company7.png) no-repeat;
+}
+.company .con .item:nth-of-type(8){
+	background: url(../img/company8.png) no-repeat;
+	margin-right: 0;
+}
