@@ -82,13 +82,13 @@
 			var timerF;     //开火定时器
 			var rotate=0;   //记录坦克目前角度 初始向右为0
 			function fire(){      //生成子弹、发射子弹、炮管后坐力、清除子弹和定时器
-				var bull=document.createElement("div");
+				var bull=document.createElement("div");   //生成子弹
 				bull.className="bull";
 				document.body.appendChild(bull);
 				if(face=="r"){
-					bull.style.left=box.offsetLeft+150+"px";
+					bull.style.left=box.offsetLeft+150+"px";    //初始位置
 					bull.style.top=box.offsetTop+45+"px";
-					var timer1=setInterval(function(){
+					var timer1=setInterval(function(){        //开定时器
 						bull.style.left=parseFloat(bull.style.left)+10+"px";
 					},10);
 				}
@@ -115,7 +115,7 @@
 				}
 				pao.style.transition=0.05+"s";    //炮管后坐力
 				pao.style.left=20+"px";
-				setTimeout(function(){
+				setTimeout(function(){      //炮管回弹
 					pao.style.transition=0.5+"s";
 					pao.style.left=50+"px";
 				},100);
@@ -229,7 +229,7 @@
 </html>
 <!--
 解决问题：
-	①老师数组法解决按下两个键抬起一个键的bug
+	①数组法解决按下两个键抬起一个键的bug
 	②解决方向右键的bug：改用小键盘1235
 	③解决按住空格再走动会停止发射子弹 （开定时器发射炮弹）
 	④解决了傻转270度转回去
