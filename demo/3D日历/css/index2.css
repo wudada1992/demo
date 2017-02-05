@@ -1,4 +1,4 @@
-body{
+﻿body{
 	margin:0;
 	background:#1c2d3f;
 	overflow: hidden;
@@ -56,11 +56,12 @@ a{
 #eng{
 	position:absolute;
 	font:180px/180px "times new roman";
-	color:#fff;
+	color:#2b4560;
 	letter-spacing: -5px;
 	font-style:italic;
 	left:494px;
 	bottom:-300px;
+	z-index: -1;
 }
 /*日期*/
 #Day{

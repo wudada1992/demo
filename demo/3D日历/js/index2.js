@@ -204,7 +204,7 @@ if(Month == 12){
 	eng.innerHTML = "December";
 }
 setTimeout(function(){
-	move(eng,{"bottom":46},300);
+	move(eng,{"bottom":130},300);
 },int4);
 //轮播图左侧时间信息
 function TimeDate(){
