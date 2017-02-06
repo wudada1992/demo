@@ -2,7 +2,7 @@
 class Player{
 	constructor(){
 		//可以定制的
-		this.rate=1;     //射击速度,单位是秒
+		this.rate=0.1;     //射击速度,单位是秒
 		this.speed=2;     //移动速度（实际移动距离）
 		this.head=new Image;
 		this.head.src="../img/canvas/p-head.png";   //初始图片路径
@@ -61,10 +61,9 @@ class Player{
 			}
 		}
 		//角度跟随鼠标
-		var deltaY=my-this.y;
-	    var deltaX=mx-this.x;
+		let deltaY=my-this.y;
+	    let deltaX=mx-this.x;
 	    this.angle=Math.atan2(deltaY,deltaX);   
-	    
 	    //绘制
 		ctx.save();     //使里面设置不影响外面
 		ctx.translate(this.x,this.y);

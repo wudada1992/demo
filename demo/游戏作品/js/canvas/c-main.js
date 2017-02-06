@@ -1,17 +1,14 @@
 
-var can;    //canvas画布
-var ctx;     //画布场景
-
-var canWidth;   //画布宽度
-var canHeight;
-
-var mx;     //鼠标相对于画布左距离
-var my;
-
-var p ;     //玩家
-var keySet;     //方向按键set   es6写法
-var bulSet       //子弹set
-var monSet;       //怪兽set
+let can,    //canvas画布
+	ctx,     //画布场景
+	canWidth,   //画布宽度
+	canHeight,
+	mx,     //鼠标相对于画布左距离
+	my,
+	p,     //玩家
+	keySet,     //方向按键set   es6写法
+	bulSet,       //子弹set
+	monSet       //怪兽set
 window.onload=function(){
 	init();     //初始化
 	creatMonster();  //产生怪兽
@@ -45,7 +42,7 @@ function init(){
 		my=e.offsetY;
 		//判断射击间隔
 		if(p.canFire){     //如果人物是可以射击状态，射击
-			var b=new Bullet(e);
+			let b=new Bullet(e);
 			bulSet.add(b);
 			p.canFire=false;    //射击后状态为不可射击状态，
 			p.reFire();         //等待根据p的射速重置可射击状态
@@ -88,24 +85,23 @@ function gameloop(){
 	ctx.clearRect(0,0,canWidth,canHeight);     //清除画布
 	p.draw();           //绘制人
 	//绘制怪兽们
-	var monArr=[...monSet];
-	for(var i=0;i<monArr.length;i++){
-		monArr[i].draw();
+	for(let value of monSet){
+		value.draw();
 	}
 	//绘制子弹们
-	var bulArr=[...bulSet];
-	for(var i=0;i<bulArr.length;i++){
-		bulArr[i].draw();
+	for(let value of bulSet){
+		value.draw();
 	}
+	
 }
 //产生怪兽
 function creatMonster(){
 	var timer=setInterval(function(){
-		var n=Math.ceil(2*Math.random());
+		var n=Math.ceil(1*Math.random());
 		for (var i = 0; i <n; i++) {
 			var m=new Monster();
 			monSet.add(m);
 		}
-	},2000)
+	},1000)
 	
 }
