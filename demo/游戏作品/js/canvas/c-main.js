@@ -97,11 +97,11 @@ function gameloop(){
 //产生怪兽
 function creatMonster(){
 	var timer=setInterval(function(){
-		var n=Math.ceil(1*Math.random());
+		var n=Math.ceil(2*Math.random());
 		for (var i = 0; i <n; i++) {
 			var m=new Monster();
 			monSet.add(m);
 		}
-	},1000)
+	},3000)
 	
 }

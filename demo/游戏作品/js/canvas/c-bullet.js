@@ -25,7 +25,7 @@ class Bullet{
 		//当前位置碰撞检测
 		for(let value of monSet){   //遍历所有怪物
 			let l=Math.sqrt(Math.pow(Math.abs(this.x-value.x),2)+Math.pow(Math.abs(this.y-value.y),2));   //子弹和怪物的距离
-			if(l<value.w*0.5){          //如果子弹和怪物的距离小于怪物宽度的一半，射中
+			if(l<value.w*0.1){          //如果子弹和怪物的距离小于怪物宽度的一半，射中
 				value.hp-=this.damage;   //怪物的生命值减去子弹的攻击力
 				if(value.hp<=0){            //如果怪物没血了
 					value.death();          //怪物死亡

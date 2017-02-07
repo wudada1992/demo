@@ -2,24 +2,36 @@
 class Monster{
 	constructor(){
 		//可以定制的属性
-		this.name="pig";            //怪物名字
-		this.status="run";          //怪物状态
-		this.face="r";              //怪物朝向
-		this.runImgNum=8;        //怪物跑动序列帧每个方向有几张图
-		this.imgNum=8;            //当前状态下序列帧有几张图
-		this.imgNumNow=0;      //记录当前状态下图片播放到第几张了，切换状态时记得清零这个数，以便切回来时从头播放动画。
-		this.imgSet=new Set;      //存储当前图片们
-		this.img=new Image();       //下一帧怪物应当展示的图片
-		
-		
+		this.name="fox";            //怪物名字
 		this.atr=30;                //攻击范围
 		this.speed=3;              //移动速度(实际移动距离)
-		this.born();                 //执行方法，为当前实例添加位置坐标xy，并初始化在出生点。
-		this.hp=2;                  //生命值
+		this.hp=1;                  //生命值
+		this.w=150;                  //图宽
+		this.h=150;                  //图高
+		this.b=20;                   //怪物的肥胖程度，单位px，决定命中角度大小
+		this.imgsRunAll=10;         //怪物跑动图片有几张
+		this.imgsHitAll=0;          //怪物攻击图片有几张
+		this.imgsInjuredAll=0;        //怪物受伤有几张图片
+		this.imgsDeathAll=0;          //怪物死亡图片有几张
 		//不需要定制的
-		this.w=50;                  //图宽
-		this.h=50;                  //图高
+		this.x;                     //当前x坐标
+		this.y;                     //当前y坐标
 		this.angle=0;                //怪物朝向
+		this.status="run";          //怪物状态
+		this.img;                   //怪物将要显示的下一张图片,存的是图片不是src
+		this.imgsRun=[];          //怪物跑动图片,存的是图片
+		this.runNow=0;        //记录跑动当前在第几张图片
+		this.imgsHit=[];         //怪物攻击图片,存的是图片
+		this.hitNow=0;        //记录攻击当前在第几张图片
+		this.imgsDeath=[];         //怪物死亡图片,存的是图片
+		this.deathNow=0;        //记录死亡当前在第几张图片
+		this.imgsInjured=[];      //怪物受伤图片,存的是图片
+		this.injuredNow=0;        //记录受伤当前在第几张图片
+		this.init()      //初始化（需要计算后添加的自身属性）
+	}
+	init(){
+		this.born();                 //为当前实例添加位置坐标xy，并初始化在出生点
+		this.creatImgs();                 //添加当前实例的所有图片地址，到自己身上
 	}
 	draw(){
 		let deltaY=p.y-this.y;           //y方向怪物和人的距离，正负值决定方向
@@ -38,22 +50,14 @@ class Monster{
 		
 		//计算怪物与人的角度
 	    this.angle=Math.atan2(deltaY,deltaX)+Math.PI/2;  
-	    //决定img
-	    this.imgs();              //执行方法，决定this.imgSet里面的图片路径
-	    this.img.src=[...this.imgSet][this.imgNumNow];   //给图片赋路径
-	    this.imgNumNow++;
-	    this.imgNumNow%=this.imgNum;
-	    
+	    this.nextImg();
 	    //canvas绘制
 	    ctx.save();
 	    ctx.translate(this.x,this.y);
 		ctx.rotate(this.angle);
-		ctx.drawImage(this.img,-this.w*0.5,-this.h*0.5);
+		ctx.drawImage(this.img,-this.w*0.5,-this.h*0.5,this.w,this.h);
 		ctx.restore();   //使里面设置不影响外面
 		
-	}
-	death(){           //怪物死亡
-		monSet.delete(this);
 	}
 	born(){
 		let r1=Math.random();     //产生一个随机数，如果小于等于0.5，怪物从左右两侧生成，否则从上下生成
@@ -74,42 +78,40 @@ class Monster{
 			this.x=canWidth*Math.random();
 		}
 	}
-	imgs(){          //决定什么怪物、什么状态下、哪个方向的序列帧图
-		this.imgSet.clear();    //每次决定前先清空
-		//判断八方向
-		let n=this.angle;
-		if(n>-0.375&&n<=0.375){     //右
-			this.face="r";
+	death(){           //怪物死亡
+		monSet.delete(this);
+	}
+	creatImgs(){          //添加当前怪物的所有图片
+		
+		//添加跑动状态的图片
+		for (let i = 0; i <this.imgsRunAll; i++) {
+			let img=new Image();
+			img.src='../img/canvas/monster/'+this.name+'/run/'+i+'.png';
+			this.imgsRun.push(img);
 		}
-		if(n>0.375&&n<=1.125){     //右下
-			this.face="rb";
+		//添加攻击状态的图片
+		for (let i = 0; i <this.imgsHitAll; i++) {
+			let img=new Image();
+			img.src='../img/canvas/monster/'+this.name+'/hit/'+i+'.png';
+			this.imgsHit.push(img);
 		}
-		if(n>1.125&&n<=1.875){     //下
-			this.face="b";
+		//添加受伤状态的图片
+		for (let i = 0; i <this.imgsInjuredAll; i++) {
+			let img=new Image();
+			img.src='../img/canvas/monster/'+this.name+'/injured/'+i+'.png';
+			this.imgsInjured.push(img);
 		}
-		if(n>1.875&&n<=2.625){     //左下
-			this.face="lb";
+		//添加死亡状态的图片
+		for (let i = 0; i <this.imgsDeathAll; i++) {
+			let img=new Image();
+			img.src='../img/canvas/monster/'+this.name+'/death/'+i+'.png';
+			this.imgsDeath.push(img);
 		}
-		if(n>2.625&&n<=3||n>=-3&&n<=-2.625){     //左
-			this.face="l";
-		}
-		if(n>-2.625&&n<=-1.875){     //左上
-			this.face="lt";
-		}
-		if(n>-1.875&&n<=-1.125){     //上
-			this.face="t";
-		}
-		if(n>-1.125&&n<=-0.375){     //右上
-			this.face="rt";
-		}
-		//生成新的imgSet
-			//根据当前状态决定图片张数
-		if(this.status=="run"){    //跑动状态
-			this.imgNum=this.runImgNum;
-		}
-		for(let i=0;i<this.imgNum;i++){    //向imgSet里添加图面路径
-			let str='../img/canvas/monster/'+this.name+'/'+this.status+'/'+this.face+'/'+i+'.png';
-			this.imgSet.add(str);
+	}
+	nextImg(){          //决定下一张图片是什么
+		if(this.status=="run"){          //如果当前是跑动状态
+			this.img=this.imgsRun[this.runNow];
+			this.runNow=(this.runNow+1)%this.imgsRunAll;   //取模循环跑动
 		}
 	}
 }
