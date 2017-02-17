@@ -20,6 +20,7 @@ class Monster{
 		this.hp=this.maxHp;                  //当前生命值
 		this.pNum=0;   //标记显示pow图片，0代表不显示，1-14代表显示且循环中。作用类似开关，一旦将值设置成1， 
 					//则循环绘制自动开始，一旦将此值设置为0或到时自动归0，循环绘制结束。   this.powFn
+		this.pNum2=0;   //记录pow图在最大位置停留了几次
 		this.hpNum=0;        //标记显示血条，不等于0时自动循环1-40，循环结束自动清零。    this.showHp
 		this.x=0;                     //当前x坐标
 		this.y=0;                     //当前y坐标
@@ -174,14 +175,21 @@ class Monster{
 	}
 	powFn(){            //根据this.pNum判断是否需要生成pow，如果需要则生成pow并计数开始，到时自动结束绘制。
 		if(this.pNum!==0){       //如果被标记，则绘制pow，且pow大小根据this.pNum
+			if(this.pNum===1){    //如果是刚被设为1，令pNum2归零，目的是每一个pow图在新生成的时候刷新其pNum2计数
+				this.pNum2=0;
+			}
 			let w=this.pNum*2.5+20;
 	    	ctx.save();
 		    ctx.translate(this.x,this.y);
 			ctx.drawImage(this.powImg,-w/2,-w/2,w,w);     
 			ctx.restore();   
 			this.pNum++;             //这里必须用
-			if(this.pNum>=14){        //如果p加到了14，p归零，取消标记
-				this.pNum=0;
+			if(this.pNum>=14){        //如果p加到了14，返回到13，并记录返回了几次this.pNum2。目的是让pow图在这个大小停留一段时间
+				this.pNum--;
+				this.pNum2++;        //记录pow在最终大小停留了几次
+				if(this.pNum2===30){   //如果停留到一定次数，pow图消失
+					this.pNum=0;       //pow图消失
+				}
 			}
 		}
 	}

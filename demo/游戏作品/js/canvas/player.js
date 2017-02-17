@@ -3,6 +3,7 @@ class Player{
 	constructor(){
 		//可以定制的
 		this.maxHp=100;          //人物血量上限
+		this.shot=3;                 //每次攻击发射几颗子弹
 		this.damage=1;           //子弹攻击力
 		this.cri=0.5;             //暴击率
 		this.rate=0.1;     //射击速度,单位是秒
@@ -11,7 +12,7 @@ class Player{
 		this.head.src="../img/canvas/p-head.png";   //初始图片路径
 //Object.assign()用来覆盖对象,es7.   es6直接用 class a extends b 来继承class
 		//不需要定制的
-		this.scratchNum=0;   //显示抓痕计数，为0时不显示抓痕，不为0时为循环显示抓痕状态。（动物攻击时将此数设为1），循环到2然后自动归零
+		this.scratchNum=0;   //显示抓痕计数，为0时不显示抓痕，不为0时为循环显示抓痕状态。（动物攻击时将此数设为1），循环到设定之后然后自动归零
 		this.hp=this.maxHp; //人物当前hp
 		this.w=100;       //图宽
 		this.h=100;       //图高
@@ -40,7 +41,7 @@ class Player{
 		ctx.drawImage(this.head,-this.w*0.35,-this.h*0.5,this.w,this.h);
 		ctx.restore();   //使里面设置不影响外面
 		//判断是否显示抓痕
-		showScratch();
+		this.showScratch();
 	}
 	move(){
 		if(keySet.size){   //如果按键数组里面有内容
@@ -94,11 +95,23 @@ class Player{
 	}
 	showScratch(){       //判断是否显示抓痕
 		if(this.scratchNum!==0){    //如果不为0，显示抓痕（动物攻击时会将此值设为1）
+			//绘制抓痕
 			ctx.save();
 		    ctx.translate(this.x,this.y);
-			ctx.drawImage(this.scratchImg,          0    ,0       ,150     ,8    , -50     ,-50    ,100    ,6);
-			              //图片                                        开始裁切x位                                     开始裁切y位   裁切宽      裁切高     x轴偏移量   y轴偏移量        图片宽    图片高
-			ctx.restore();  
+			ctx.drawImage(this.scratchImg,      0    ,0       ,214  ,  100  , -25   ,-12     ,50  ,25);   
+			              //图片                           开始裁切x位      开始裁切y位   裁切宽      裁切高     x轴偏移量   y轴偏移量        图片宽    图片高
+			ctx.restore(); 
+			//绘制全局红色背景
+            ctx.save();
+            ctx.beginPath(); 
+            ctx.fillStyle="rgba(255,0,0,0.4)";/*设置填充颜色*/ 
+            ctx.fillRect(0,0,canWidth,canHeight);/*绘制一个矩形，前两个参数决定开始位置，后两个分别是矩形的宽和高*/ 
+            ctx.restore();
+            //循环计数判断
+			this.scratchNum++;
+			if(this.scratchNum>30){   //攻击完成，图片自动消失
+				this.scratchNum=0;
+			}
 		}
 	}
 }
