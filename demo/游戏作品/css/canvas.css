@@ -1,0 +1,147 @@
+body {
+  overflow: hidden;
+}
+#wrap {
+  width: 1200px;
+  height: 800px;
+  margin: 50px auto 0;
+  position: relative;
+  background: url(../img/canvas/1.png) no-repeat;
+  background-size: 100% 100%;
+}
+#wrap #talent_wrap {
+  width: 1200px;
+  height: 800px;
+  background: url(../img/canvas/talent/talent-bg.png) no-repeat center center;
+  background-size: 60% 100%;
+}
+#wrap #talent_wrap #content {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  left: 320px;
+  top: 130px;
+}
+#wrap #talent_wrap #content .text {
+  position: absolute;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  width: 200px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #000;
+  border-radius: 3px;
+  z-index: 2;
+}
+#wrap #talent_wrap #content .text header {
+  font: 18px/30px "微软雅黑";
+  color: #f00a0a;
+}
+#wrap #talent_wrap #content .text .num {
+  font: 14px/20px "微软雅黑";
+  color: #ffff00;
+}
+#wrap #talent_wrap #content .text .describe {
+  padding-top: 5px;
+  font: 12px/18px "微软雅黑";
+  color: #fff;
+}
+#wrap #talent_wrap #content .t {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  border-radius: 5px;
+  box-shadow: -10px 15px 10px 0px rgba(0, 0, 0, 0.3);
+  background: url(../img/canvas/talent/talents.png) no-repeat;
+}
+#wrap #talent_wrap #content .t .info {
+  position: absolute;
+  width: 25px;
+  height: 12px;
+  border: 1px solid green;
+  background: rgba(0, 0, 0, 0.9);
+  left: 20px;
+  top: 43px;
+  text-align: center;
+  color: green;
+  font: bold 14px/12px arial;
+}
+#wrap #talent_wrap #content #lf1 {
+  position: absolute;
+  width: 45px;
+  height: 120px;
+  background: url(../img/canvas/talent/lf.png) no-repeat;
+  left: 140px;
+  top: 212px;
+}
+#wrap #talent_wrap #content #lf2 {
+  position: absolute;
+  width: 45px;
+  height: 120px;
+  background: url(../img/canvas/talent/lf.png) no-repeat;
+  left: 440px;
+  top: 212px;
+}
+#wrap #talent_wrap #content #mi1 {
+  position: absolute;
+  width: 16px;
+  height: 100px;
+  background: url(../img/canvas/talent/mi.png) no-repeat;
+  left: 70px;
+  top: 150px;
+}
+#wrap #talent_wrap #content #mi2 {
+  position: absolute;
+  width: 16px;
+  height: 100px;
+  background: url(../img/canvas/talent/mi.png) no-repeat;
+  left: 120px;
+  top: 350px;
+}
+#wrap #talent_wrap #content #mi3 {
+  position: absolute;
+  width: 16px;
+  height: 100px;
+  background: url(../img/canvas/talent/mi.png) no-repeat;
+  left: 270px;
+  top: 150px;
+}
+#wrap #talent_wrap #content #mi4 {
+  position: absolute;
+  width: 16px;
+  height: 100px;
+  background: url(../img/canvas/talent/mi.png) no-repeat;
+  left: 370px;
+  top: 112px;
+}
+#wrap #talent_wrap #content #mi5 {
+  position: absolute;
+  width: 16px;
+  height: 100px;
+  background: url(../img/canvas/talent/mi.png) no-repeat;
+  left: 470px;
+  top: 150px;
+}
+#wrap #talent_wrap #content #mi6 {
+  position: absolute;
+  width: 16px;
+  height: 100px;
+  background: url(../img/canvas/talent/mi.png) no-repeat;
+  left: 420px;
+  top: 350px;
+}
+#wrap #talent_wrap #content #rt1 {
+  position: absolute;
+  width: 45px;
+  height: 120px;
+  background: url(../img/canvas/talent/rt.png) no-repeat;
+  left: 70px;
+  top: 212px;
+}
+#wrap #talent_wrap #content #rt2 {
+  position: absolute;
+  width: 45px;
+  height: 120px;
+  background: url(../img/canvas/talent/rt.png) no-repeat;
+  left: 371px;
+  top: 212px;
+}

@@ -95,7 +95,6 @@ class Monster{
 			if(this.hitNow===this.imgsHitAll){   
 				//人物掉血
 				p.hp-=this.atk;
-//				console.log(p.hp);    //掉血成功
 				p.scratchNum=1;      //人物身上出现抓痕
 				//判断人物血量，被攻击时再判断即可，不需要每一帧都判断，所以放在这里进行判断
 				if(p.hp<=0){     //人物没血死亡

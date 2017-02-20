@@ -1,0 +1,6 @@
+body{overflow:hidden}
+#wrap{width:1200px;height:800px;margin:50px auto 0;position:relative;background:url(../img/canvas/1.png) no-repeat;background-size:100% 100%}
+#wrap #talent_wrap{width:1200px;height:800px;background:url(../img/canvas/talent/talent-bg.png) no-repeat center center;background-size:60% 100%}
+#wrap #talent_wrap #content{position:relative;width:600px;height:600px;background:pink;left:320px;top:130px}
+#wrap #talent_wrap #content .t{position:absolute;width:50px;height:50px;background:url(../img/canvas/talent/talents.png) no-repeat}
+#wrap #talent_wrap #content .t .info{position:absolute;width:25px;height:12px;border:1px solid green;background:rgba(0,0,0,.9);left:20px;top:43px;text-align:center;color:green;font:700 14px/12px arial}

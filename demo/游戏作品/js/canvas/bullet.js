@@ -1,9 +1,8 @@
 class Bullet{
 	constructor(e,obj,d){    //e是鼠标信息；obj是子弹信息对象 ；如果传入了d，则子弹是散弹的偏转弹，this.angle根据d的值会有相应偏转
 		//可以定制的属性
-		this.w=50;              //图宽
-		this.h=50;              //图高
-		this.l=500;              //射程
+		this.w=40;              //图宽
+		this.h=40;              //图高
 		this.speed=20;           //子弹飞行速度
 		this.img=new Image();           //子弹图片
 		this.img.src="../img/canvas/bullet.png";
@@ -58,7 +57,7 @@ class Bullet{
 		this.move();            //子弹将要移动到的位置
 		//判断超出射程
 		this.nl=Math.sqrt(Math.pow(Math.abs(this.x-this.ox),2)+Math.pow(Math.abs(this.y-this.oy),2));     //当前子弹将要飞行距离，如果这个距离超过射程，销毁子弹
-		if(this.nl>this.l){
+		if(this.nl>p.atr){
 			this.death();
 			return;
 		}
