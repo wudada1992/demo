@@ -21,8 +21,8 @@ class Player{
 		this.hp=this.maxHp; //人物当前hp
 		this.w=150;       //图宽
 		this.h=150;       //图高
-		this.x=canWidth*0.5;       //x坐标
-		this.y=canHeight*0.5;       //y坐标
+		this.x=document.getElementById("canvas").width*0.5;       //x坐标
+		this.y=document.getElementById("canvas").height*0.5;       //y坐标
 		this.canFire=true;   //是否可以射击   ，布尔值，开关作用
 		this.angle=0;      //旋转角度
 		this.scratchImg=new Image();    //抓痕图片
@@ -44,27 +44,27 @@ class Player{
 		//计算移动距离（通过监听keySet），判断站、走状态
 		this.move();
 		//角度跟随鼠标
-		let deltaY=my-this.y;
-	    let deltaX=mx-this.x;
+		let deltaY=canvas.my-this.y;
+	    let deltaX=canvas.mx-this.x;
 	    this.angle=Math.atan2(deltaY,deltaX)+Math.PI/2;  
 	    //根据状态决定this.img
 	    this.imgFn();
 	    //绘制
-		ctx.save();     //使里面设置不影响外面
-		ctx.translate(this.x,this.y);
-		ctx.rotate(this.angle);
-		ctx.drawImage(this.img,-this.w*0.5,-this.h*0.5,this.w,this.h);
-		ctx.restore();   //使里面设置不影响外面
+		canvas.ctx.save();     //使里面设置不影响外面
+		canvas.ctx.translate(this.x,this.y);
+		canvas.ctx.rotate(this.angle);
+		canvas.ctx.drawImage(this.img,-this.w*0.5,-this.h*0.5,this.w,this.h);
+		canvas.ctx.restore();   //使里面设置不影响外面
 		//判断是否显示抓痕
 		this.showScratch();
 		//判断是否显示血条
 		this.showHp();
 	}
 	move(){
-		if(keySet.size){   //如果按键数组里面有内容，奔跑状态
+		if(canvas.keySet.size){   //如果按键数组里面有内容，奔跑状态
 			this.status="run";
-			if(keySet.has("l")){    //左
-				if(keySet.size==1){   //只按下一个方向键
+			if(canvas.keySet.has("l")){    //左
+				if(canvas.keySet.size==1){   //只按下一个方向键
 					this.x-=this.speed;
 				}else{      ////按下两个方向键
 					this.x-=this.speed/2*Math.sqrt(2);    //保证斜着距离为speed
@@ -73,18 +73,18 @@ class Player{
 					this.x=0;
 				}
 			}
-			if(keySet.has("r")){    //右
-				if(keySet.size==1){   
+			if(canvas.keySet.has("r")){    //右
+				if(canvas.keySet.size==1){   
 					this.x+=this.speed;
 				}else{      //斜着走
 					this.x+=this.speed/2*Math.sqrt(2);    
 				}
-				if(this.x>canWidth){
-					this.x=canWidth;
+				if(this.x>canvas.canWidth){
+					this.x=canvas.canWidth;
 				}
 			}
-			if(keySet.has("t")){    //上
-				if(keySet.size==1){   
+			if(canvas.keySet.has("t")){    //上
+				if(canvas.keySet.size==1){   
 					this.y-=this.speed;
 				}else{      //斜着走
 					this.y-=this.speed/2*Math.sqrt(2);    
@@ -93,14 +93,14 @@ class Player{
 					this.y=0;
 				}
 			}
-			if(keySet.has("b")){    //下
-				if(keySet.size==1){   
+			if(canvas.keySet.has("b")){    //下
+				if(canvas.keySet.size==1){   
 					this.y+=this.speed;
 				}else{      //斜着走
 					this.y+=this.speed/2*Math.sqrt(2);    
 				}
-				if(this.y>canHeight){
-					this.y=canHeight;
+				if(this.y>canvas.canHeight){
+					this.y=canvas.canHeight;
 				}
 			}
 		}else{          //站立状态        
@@ -117,17 +117,17 @@ class Player{
 	showScratch(){       //判断是否显示抓痕
 		if(this.scratchNum!==0){    //如果不为0，显示抓痕（动物攻击时会将此值设为1）
 			//绘制抓痕
-			ctx.save();
-		    ctx.translate(this.x,this.y);
-			ctx.drawImage(this.scratchImg,      0    ,0       ,214  ,  100  , -25   ,-12     ,50  ,25);   
+			canvas.ctx.save();
+		    canvas.ctx.translate(this.x,this.y);
+			canvas.ctx.drawImage(this.scratchImg,      0    ,0       ,214  ,  100  , -25   ,-12     ,50  ,25);   
 			              //图片                           开始裁切x位      开始裁切y位   裁切宽      裁切高     x轴偏移量   y轴偏移量        图片宽    图片高
-			ctx.restore(); 
+			canvas.ctx.restore(); 
 			//绘制全局红色背景
-            ctx.save();
-            ctx.beginPath(); 
-            ctx.fillStyle="rgba(255,0,0,0.4)";/*设置填充颜色*/ 
-            ctx.fillRect(0,0,canWidth,canHeight);/*绘制一个矩形，前两个参数决定开始位置，后两个分别是矩形的宽和高*/ 
-            ctx.restore();
+            canvas.ctx.save();
+            canvas.ctx.beginPath(); 
+            canvas.ctx.fillStyle="rgba(255,0,0,0.4)";/*设置填充颜色*/ 
+            canvas.ctx.fillRect(0,0,canvas.canWidth,canvas.canHeight);/*绘制一个矩形，前两个参数决定开始位置，后两个分别是矩形的宽和高*/ 
+            canvas.ctx.restore();
             //循环计数判断
 			this.scratchNum++;
 			if(this.scratchNum>30){   //攻击完成，图片自动消失
@@ -139,12 +139,12 @@ class Player{
 	    if(this.hp<0){
 			this.hp=0;
 		}
-		ctx.save();
-		ctx.translate(this.x,this.y);
-		ctx.drawImage(this.hpImg  ,0    ,0       ,55  ,8    , -50     ,-50    ,100    ,6);   //灰色底图
+		canvas.ctx.save();
+		canvas.ctx.translate(this.x,this.y);
+		canvas.ctx.drawImage(this.hpImg  ,0    ,0       ,55  ,8    , -50     ,-50    ,100    ,6);   //灰色底图
 			           //图片        开始裁切x位   开始裁切y位   裁切宽      裁切高     x轴偏移量   y轴偏移量     图片宽    图片高
-		ctx.drawImage(this.hpImg  ,55  ,0        ,54  ,8    , -50     ,-50    ,this.hp/this.maxHp*100,6);   //绿色血条              
-		ctx.restore();   	
+		canvas.ctx.drawImage(this.hpImg  ,55  ,0        ,54  ,8    , -50     ,-50    ,this.hp/this.maxHp*100,6);   //绿色血条              
+		canvas.ctx.restore();   	
 	}
 	imgFn(){              //根据状态决定下一张img
 		if(this.status==="stand"){   //站立

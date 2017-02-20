@@ -9,8 +9,8 @@ class Bullet{
 		this.cr=false;            //子弹是否暴击，如果直接设为true，则不再进行计算，必定暴击
 		this.nb=true;            //子弹是否为击退弹，false代表不是
 		//不需要定制
-		this.ox=p.x;            //子弹发射时的初始x
-		this.oy=p.y;            //子弹发射时的初始y
+		this.ox=canvas.p.x;            //子弹发射时的初始x
+		this.oy=canvas.p.y;            //子弹发射时的初始y
 		this.x=this.ox;             //当前坐标x
 		this.y=this.oy;             //当前坐标y
 		this.nl=0;             //当前子弹飞行的距离
@@ -29,17 +29,17 @@ class Bullet{
 	}
 	draw(){
 		//当前位置碰撞检测
-		for(let value of monSet){   //遍历所有怪物
+		for(let value of canvas.monSet){   //遍历所有怪物
 			let l=Math.sqrt(Math.pow(Math.abs(this.x-value.x),2)+Math.pow(Math.abs(this.y-value.y),2));   //子弹和怪物的距离
 			if(l<value.b&&value.hp>0){          //射中，如果子弹和怪物的距离小于怪物的肥胖程度并且怪物还有血（没血时有一段时间在演示死亡动画，此时不应该可以射中），射中
 				//显示血条
 				value.hpNum=1;
 				//掉血（受暴击影响）
 				if(this.cr==true){        //如果当前子弹是暴击，攻击力双倍
-					value.hp-=p.damage*2;
+					value.hp-=canvas.p.damage*2;
 					value.pNum=1;            //在怪物身上标记显示pow图片
 				}else{                    //如果没有暴击，攻击力正常
-					value.hp-=p.damage;
+					value.hp-=canvas.p.damage;
 				}
 				//判断击退
 				if(this.nb===true){       //如果是击退弹，改变怪物状态为击退状态
@@ -57,7 +57,7 @@ class Bullet{
 		this.move();            //子弹将要移动到的位置
 		//判断超出射程
 		this.nl=Math.sqrt(Math.pow(Math.abs(this.x-this.ox),2)+Math.pow(Math.abs(this.y-this.oy),2));     //当前子弹将要飞行距离，如果这个距离超过射程，销毁子弹
-		if(this.nl>p.atr){
+		if(this.nl>canvas.p.atr){
 			this.death();
 			return;
 		}
@@ -66,7 +66,7 @@ class Bullet{
 	}
 	//子弹死亡
 	death(){
-		bulSet.delete(this);
+		canvas.bulSet.delete(this);
 	}
 	//子弹移动
 	move(){
@@ -77,7 +77,7 @@ class Bullet{
 	crFn(){
 		if(this.cr==false){     //如果没有被直接设为true，则进行判断
 		 	let n=Math.random();
-		 	if(n<p.cri){    //如果随机到的数小于人物暴击率[0-1],暴击
+		 	if(n<canvas.p.cri){    //如果随机到的数小于人物暴击率[0-1],暴击
 		 		this.cr=true;
 		 	}
 		}	 
@@ -102,11 +102,11 @@ class Bullet{
 		}
 	}
 	drawFn(){
-		ctx.save();
-	    ctx.translate(this.x,this.y);
-	    ctx.rotate(this.angle);
-		ctx.drawImage(this.img,-this.w,-this.h*0.5,this.w,this.h);
-		ctx.restore();   //使里面设置不影响外面
+		canvas.ctx.save();
+	    canvas.ctx.translate(this.x,this.y);
+	    canvas.ctx.rotate(this.angle);
+		canvas.ctx.drawImage(this.img,-this.w,-this.h*0.5,this.w,this.h);
+		canvas.ctx.restore();   //使里面设置不影响外面
 	}
 	
 }

@@ -4,46 +4,32 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
 		<link rel="stylesheet" type="text/css" href="../css/canvas.css"/>
+		<script src="../js/TweenMax.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body onselectstart="return false">
 		<div id="wrap">
-			<div id="talent_wrap">
-				<div id="content">
-					<!--<div class="t" id="atk">攻击力
-						<div class="info">
-							2/3
-						</div>
-					</div>
-					<div class="t" id="speed">移动速度</div>
-					<div class="t" id="hp">生命</div>
-					<div class="t" id="atr">攻击范围</div>
-					<div class="t" id="atkB">大攻击力</div>
-					<div class="t" id="cri">暴击率</div>
-					<div class="t" id="nb">击退</div>
-					<div class="t" id="rate">攻击速度</div>
-					<div class="t" id="thump">穿甲</div>
-					<div class="t" id="vast">散弹</div>
-					<div class="t" id="hurt">暴击伤害</div>
-					<div class="t" id="num">散弹数量</div>-->
-					<div id="lf1"></div>
-					<div id="lf2"></div>
-					<div id="mi1"></div>
-					<div id="mi2"></div>
-					<div id="mi3"></div>
-					<div id="mi4"></div>
-					<div id="mi5"></div>
-					<div id="mi6"></div>
-					<div id="rt1"></div>
-					<div id="rt2"></div>
-				</div>
+			<!--游戏主页-->
+			<div id="main">
+				<video width="auto" height="100%" autoplay="autoplay" loop="loop" id="vd">
+					<source src="../img/video.mp4" type="video/mp4"></source>
+					当前浏览器不支持 video直接播放，点击这里下载视频： <a href="javascript:;">下载视频</a>
+				</video>
 			</div>
+			<!--天赋页-->
+			<div id="talent_wrap">   
+				<div id="content"></div>
+			</div>
+			<!--canvas-->
 			<canvas id="canvas" width="1200" height="800"></canvas>
 		</div>
-		<script src="../js/canvas/data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/canvas/data.js" type="text/javascript"></script>
 		<script src="../js/canvas/commonFunctions.js" type="text/javascript" ></script>
-		<script src="../js/canvas/main.js" type="text/javascript" ></script>
+		<script src="../js/canvas/home.js" type="text/javascript"></script>
+		<script src="../js/canvas/talent.js" type="text/javascript"></script>
+		<script src="../js/canvas/canvas.js" type="text/javascript"></script>
 		<script src="../js/canvas/player.js" type="text/javascript" ></script>
-		<script src="../js/canvas/monster.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/canvas/bullet.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/canvas/monster.js" type="text/javascript"></script>
+		<script src="../js/canvas/bullet.js" type="text/javascript"></script>
+		<script src="../js/canvas/main.js" type="text/javascript" ></script>
 	</body>
 </html>
