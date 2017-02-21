@@ -75,7 +75,7 @@ body {
   z-index: 1;
   width: 1200px;
   height: 800px;
-  background: url(../img/canvas/talent/talent-bg.png) no-repeat center center;
+  background: rgba(0, 0, 0, 0.6) url(../img/canvas/talent/talent-bg.png) no-repeat center center;
   background-size: 60% 100%;
 }
 #wrap #talent_wrap #content {
@@ -84,6 +84,17 @@ body {
   height: 600px;
   left: 320px;
   top: 130px;
+}
+#wrap #talent_wrap #content #go {
+  position: absolute;
+  left: 230px;
+  bottom: 50px;
+  width: 100px;
+  height: 30px;
+  background: pink;
+  border: 1px solid black;
+  font: 20px/30px "微软雅黑";
+  text-align: center;
 }
 #wrap #talent_wrap #content .sp {
   position: absolute;

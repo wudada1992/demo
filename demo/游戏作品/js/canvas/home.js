@@ -36,6 +36,7 @@ class HomePage{
 			this.main.style.zIndex=1;   //归正主页层级
 			document.getElementById("canvas").style.zIndex=2; //提高canvas元素的层级，漏出canvas背景但不绘制
 			document.getElementById("talent_wrap").style.zIndex=3; //提高天赋页层级
+			c.creatP(count());      //new出人物实例，参数是count计算后返回的对象，里面包含了所有技能的当前等级包括0,在这里new p是为了防止点击go进入canvas时new p太慢而卡顿
 		})
 	}
 	pushLogo(){      //logo动画进入主页

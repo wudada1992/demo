@@ -3,7 +3,7 @@ class Monster{
 	constructor(){
 		//可以定制的属性
 		this.name="fox";            //怪物名字
-		this.maxHp=10;              //最大生命值，不变化，用作血条百分比判断，变化的是this.hp当前生命值
+		this.maxHp=60;              //最大生命值，不变化，用作血条百分比判断，变化的是this.hp当前生命值
 		this.atk=10;                   //攻击力
 		this.rate=1;                   //攻击速度，单位秒
 		this.atr=70;                //攻击范围
@@ -71,7 +71,7 @@ class Monster{
 			this.deathNow++;
 			//如果所有死亡图片都播放完了，清除实例
 			if(this.deathNow===this.imgsDeathAll){    
-				canvas.monSet.delete(this);
+				c.monSet.delete(this);
 			}      
 		}
 		if(this.status==="knockback"){     //击退状态，位置后移，演示动画，可以被再次射中，但是游戏机制设置（右键cd）一定不会被再次击退
@@ -79,8 +79,8 @@ class Monster{
 		    this.img=this.imgsKnockback[this.knockbackNow];
 			this.knockbackNow++;
 			//位置根据刚被击中时的角度向相反方向移动(如此算法会导致怪物的speed越快，被击退的越远，倒也符合常理)
-			this.y-=this.dy;
-			this.x-=this.dx;
+			this.y-=this.dy*c.p.nb;  //击退距离受怪物本身移动速度和人物击退技能等级影响
+			this.x-=this.dx*c.p.nb;
 			//如果所有击退图片都播放完了，this.knockbackNow计数清零，状态变为run。如果击退过程中被打死，应正常死亡
 			if(this.knockbackNow===this.imgsKnockbackAll){    
 				this.knockbackNow=0;
@@ -94,11 +94,11 @@ class Monster{
 			//如果所有击退图片都播放完了，this.hitNow计数清零，状态变为run。如果击退过程中被打死，应正常死亡
 			if(this.hitNow===this.imgsHitAll){   
 				//人物掉血
-				canvas.p.hp-=this.atk;
-				canvas.p.scratchNum=1;      //人物身上出现抓痕
+				c.p.hp-=this.atk*c.p.coe;     //人物掉血等于怪物攻击力*人物受伤系数
+				c.p.scratchNum=1;      //人物身上出现抓痕
 				//判断人物血量，被攻击时再判断即可，不需要每一帧都判断，所以放在这里进行判断
-				if(canvas.p.hp<=0){     //人物没血死亡
-//					canvas.p.death();    //game over
+				if(c.p.hp<=0){     //人物没血死亡
+//					c.p.death();    //game over
 //					return;       //游戏结束，没必要继续了
 				}
 				this.hitNow=0;
@@ -116,16 +116,16 @@ class Monster{
 			if(r2<=0.5){    //左
 				this.x=0;
 			}else{       //右
-				this.x=canvas.canWidth;
+				this.x=c.canWidth;
 			}
-			this.y=canvas.canHeight*Math.random();
+			this.y=c.canHeight*Math.random();
 		}else{        //怪物从上下两侧生成
 			if(r2<=0.5){        //上
 				this.y=0;
 			}else{        //下
-				this.y=canvas.canHeight;
+				this.y=c.canHeight;
 			}
-			this.x=canvas.canWidth*Math.random();
+			this.x=c.canWidth*Math.random();
 		}
 	}
 	death(){           //怪物死亡
@@ -163,8 +163,8 @@ class Monster{
 	}
 	computeFn(){           //计算当前怪物的各种信息，记录在自己身上，每一帧都需要重新计算
 		//各种距离
-		this.deltaY=canvas.p.y-this.y;           //y方向怪物和人的距离，正负值决定方向
-	    this.deltaX=canvas.p.x-this.x;          //x方向怪物和人的距离，正负值决定方向
+		this.deltaY=c.p.y-this.y;           //y方向怪物和人的距离，正负值决定方向
+	    this.deltaX=c.p.x-this.x;          //x方向怪物和人的距离，正负值决定方向
 		this.l=Math.sqrt(Math.pow(Math.abs(this.deltaX),2)+Math.pow(Math.abs(this.deltaY),2));    //计算怪物和人的直线距离
 		//怪物每一步移动距离
 		this.dy=this.speed*this.deltaY/this.l;      //计算出y方向每步移动距离
@@ -178,10 +178,10 @@ class Monster{
 				this.pNum2=0;
 			}
 			let w=this.pNum*2.5+20;
-	    	canvas.ctx.save();
-		    canvas.ctx.translate(this.x,this.y);
-			canvas.ctx.drawImage(this.powImg,-w/2,-w/2,w,w);     
-			canvas.ctx.restore();   
+	    	c.ctx.save();
+		    c.ctx.translate(this.x,this.y);
+			c.ctx.drawImage(this.powImg,-w/2,-w/2,w,w);     
+			c.ctx.restore();   
 			this.pNum++;             //这里必须用
 			if(this.pNum>=14){        //如果p加到了14，返回到13，并记录返回了几次this.pNum2。目的是让pow图在这个大小停留一段时间
 				this.pNum--;
@@ -193,23 +193,23 @@ class Monster{
 		}
 	}
 	drawFn(){             //根据计算好的图片和角度，绘制怪物
-		canvas.ctx.save();
-	    canvas.ctx.translate(this.x,this.y);
-		canvas.ctx.rotate(this.angle);
-		canvas.ctx.drawImage(this.img,-this.w*0.5,-this.h*0.5,this.w,this.h);
-		canvas.ctx.restore();   //使里面设置不影响外面
+		c.ctx.save();
+	    c.ctx.translate(this.x,this.y);
+		c.ctx.rotate(this.angle);
+		c.ctx.drawImage(this.img,-this.w*0.5,-this.h*0.5,this.w,this.h);
+		c.ctx.restore();   //使里面设置不影响外面
 	}
 	showHp(){            //被击中后在一段时间内显示当前hp,一段时间后自动消失。根据this.h，如果不等于0则自动循环，结束清零
 		if(this.hpNum!==0){    //如果被标记了
 			if(this.hp<0){
 				this.hp=0;
 			}
-			canvas.ctx.save();
-		    canvas.ctx.translate(this.x,this.y);
-			canvas.ctx.drawImage(this.hpImg  ,0    ,0       ,150  ,8    , -50     ,-50    ,100    ,6);   //灰色底图
+			c.ctx.save();
+		    c.ctx.translate(this.x,this.y);
+			c.ctx.drawImage(this.hpImg  ,0    ,0       ,150  ,8    , -50     ,-50    ,100    ,6);   //灰色底图
 			              //图片        开始裁切x位   开始裁切y位   裁切宽      裁切高     x轴偏移量   y轴偏移量     图片宽    图片高
-			canvas.ctx.drawImage(this.hpImg  ,150  ,0       ,150  ,8    , -50     ,-50    ,this.hp/this.maxHp*100,6);   //黄色血条              
-			canvas.ctx.restore();   
+			c.ctx.drawImage(this.hpImg  ,150  ,0       ,150  ,8    , -50     ,-50    ,this.hp/this.maxHp*100,6);   //黄色血条              
+			c.ctx.restore();   
 			this.hpNum++;
 			if(this.hpNum>=40){        //如果p加到了40，p归零，取消标记
 				this.hpNum=0;

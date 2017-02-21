@@ -18,7 +18,8 @@ function talent(){
 					<div id="mi6"></div>
 					<div id="rt1"></div>
 					<div id="rt2"></div>
-					<div class="sp"></div>`;     
+					<div class="sp"></div>
+					<div id="go">Go!</div>`;
 		//技能图标			
 	for(value in data.talent ){
 		str+=`<div class="t" id="${value}" style="left:${data.talent[value].left}px;top:${data.talent[value].top}px;background-position:${data.talent[value].l1}px ${data.talent[value].t1}px;">
@@ -162,8 +163,11 @@ function talent(){
 			remove();
 			//生成技能描述
 			showText(name);   
+		}else if(t.id==="go"&&e.which===1){        //左击Go，开始游戏
+			document.getElementById("talent_wrap").style.zIndex=1; //降低天赋页层级，露出canvas
+			c.gameloop();    //开始循环
+			c.creatMonster();  //产生怪物
 		}
-		
 	}) 
 	content.addEventListener("contextmenu",function(e){   //事件委托,右键
 		let t=e.target;             //事件源
@@ -206,4 +210,13 @@ function talent(){
 		}
 		e.preventDefault(name);
 	})
+}
+function count(){
+	let obj={};    //用于返回的对象，存放计算后的值
+	for(value in data.talent){    //遍历天赋数据对象
+		if(data.talent.hasOwnProperty(value)){   //如果for in遍历到的属性是在talent对象身上而非其原型链上，才计算。
+			obj[value]=data.talent[value].now;   //atk:1;
+		}
+	}
+	return obj
 }

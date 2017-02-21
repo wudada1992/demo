@@ -6,11 +6,10 @@ class Bullet{
 		this.speed=20;           //子弹飞行速度
 		this.img=new Image();           //子弹图片
 		this.img.src="../img/canvas/bullet.png";
-		this.cr=false;            //子弹是否暴击，如果直接设为true，则不再进行计算，必定暴击
-		this.nb=true;            //子弹是否为击退弹，false代表不是
+		this.cr=false;            //子弹是否暴击，由crFn计算这颗子弹是否暴击
 		//不需要定制
-		this.ox=canvas.p.x;            //子弹发射时的初始x
-		this.oy=canvas.p.y;            //子弹发射时的初始y
+		this.ox=c.p.x;            //子弹发射时的初始x
+		this.oy=c.p.y;            //子弹发射时的初始y
 		this.x=this.ox;             //当前坐标x
 		this.y=this.oy;             //当前坐标y
 		this.nl=0;             //当前子弹飞行的距离
@@ -22,6 +21,7 @@ class Bullet{
 		this.dx=this.speed*this.deltaX/l;            //x方向每一步移动距离，正负
 		this.dy=this.speed*this.deltaY/l;            //y方向每一步移动距离，正负
 		this.init(e);          //添加需要计算的复杂属性
+		this.ms=new Set;       //记录当前子弹射中过的怪物，一颗子弹只能射中同一个怪物一次
 	}
 	init(e){
 		this.crFn();            //判断子弹是否是暴击
@@ -29,35 +29,44 @@ class Bullet{
 	}
 	draw(){
 		//当前位置碰撞检测
-		for(let value of canvas.monSet){   //遍历所有怪物
+		for(let value of c.monSet){   //遍历所有怪物
+			if(this.ms.has(value)){    //如果射中过这个怪物，跳过这个怪物。防止子弹在经过怪物时触发多次攻击。
+				continue;
+			}
 			let l=Math.sqrt(Math.pow(Math.abs(this.x-value.x),2)+Math.pow(Math.abs(this.y-value.y),2));   //子弹和怪物的距离
-			if(l<value.b&&value.hp>0){          //射中，如果子弹和怪物的距离小于怪物的肥胖程度并且怪物还有血（没血时有一段时间在演示死亡动画，此时不应该可以射中），射中
+			if(l<(value.b+c.p.thump*50)&&value.hp>0){    //射中，如果子弹和怪物的距离小于怪物的肥胖程度并且怪物还有血（没血时有一段时间在演示死亡动画，此时不应该可以射中），射中
 				//显示血条
 				value.hpNum=1;
 				//掉血（受暴击影响）
-				if(this.cr==true){        //如果当前子弹是暴击，攻击力双倍
-					value.hp-=canvas.p.damage*2;
+				if(this.cr==true){        //如果当前子弹是暴击，攻击力受爆伤影响
+					console.log(c.p.damage,c.p.hurt);
+					value.hp-=c.p.damage*c.p.hurt;
 					value.pNum=1;            //在怪物身上标记显示pow图片
 				}else{                    //如果没有暴击，攻击力正常
-					value.hp-=canvas.p.damage;
+					value.hp-=c.p.damage;
 				}
+				//将当前子弹射中过的怪物实例记录在自己身上this.ms   set
+				this.ms.add(value);
 				//判断击退
-				if(this.nb===true){       //如果是击退弹，改变怪物状态为击退状态
+				if(c.p.nb!==0){       //如果是击退弹，改变怪物状态为击退状态
 					value.status="knockback";
 				}
 				//判断怪物血量
 				if(value.hp<=0){            //如果怪物没血了
+					this.ms.delete(value);   //如果怪物死亡，子弹身上的ms就不需要再记录它了。
 					value.death();          //怪物死亡(写在击退状态之后，一旦死亡则死亡状态覆盖掉击退状态)
 				}
-				//射中后子弹直接死亡
-				this.death();         //子弹死亡
-				return;              //子弹死亡，不需要继续往下读了
+				//射中后根据学习的技能判断子弹是否消失
+				if(c.p.thump===0){       //如果未习得百步穿杨，射中后子弹直接死亡，如果学习了，则子弹不死亡继续飞行
+					this.death();         //子弹死亡
+					return;              //子弹死亡，不需要继续往下读了
+				}
 			}
 		}
 		this.move();            //子弹将要移动到的位置
 		//判断超出射程
 		this.nl=Math.sqrt(Math.pow(Math.abs(this.x-this.ox),2)+Math.pow(Math.abs(this.y-this.oy),2));     //当前子弹将要飞行距离，如果这个距离超过射程，销毁子弹
-		if(this.nl>canvas.p.atr){
+		if(this.nl>c.p.atr){
 			this.death();
 			return;
 		}
@@ -66,7 +75,7 @@ class Bullet{
 	}
 	//子弹死亡
 	death(){
-		canvas.bulSet.delete(this);
+		c.bulSet.delete(this);
 	}
 	//子弹移动
 	move(){
@@ -77,7 +86,7 @@ class Bullet{
 	crFn(){
 		if(this.cr==false){     //如果没有被直接设为true，则进行判断
 		 	let n=Math.random();
-		 	if(n<canvas.p.cri){    //如果随机到的数小于人物暴击率[0-1],暴击
+		 	if(n<c.p.cri){    //如果随机到的数小于人物暴击率[0-1],暴击
 		 		this.cr=true;
 		 	}
 		}	 
@@ -102,12 +111,11 @@ class Bullet{
 		}
 	}
 	drawFn(){
-		canvas.ctx.save();
-	    canvas.ctx.translate(this.x,this.y);
-	    canvas.ctx.rotate(this.angle);
-		canvas.ctx.drawImage(this.img,-this.w,-this.h*0.5,this.w,this.h);
-		canvas.ctx.restore();   //使里面设置不影响外面
+		c.ctx.save();
+	    c.ctx.translate(this.x,this.y);
+	    c.ctx.rotate(this.angle);
+		c.ctx.drawImage(this.img,-this.w,-this.h*0.5,this.w,this.h);
+		c.ctx.restore();   //使里面设置不影响外面
 	}
-	
 }
 
