@@ -1,20 +1,20 @@
 //怪兽对象
 class Monster{
-	constructor(){
+	constructor(obj){    //obj是传入的怪物数据对象（例如data.monster.fox），里面记录着怪物可定制的各项属性
 		//可以定制的属性
-		this.name="fox";            //怪物名字
-		this.maxHp=60;              //最大生命值，不变化，用作血条百分比判断，变化的是this.hp当前生命值
-		this.atk=10;                   //攻击力
-		this.rate=1;                   //攻击速度，单位秒
-		this.atr=70;                //攻击范围
-		this.speed=1.5;              //移动速度(实际移动距离)
-		this.w=150;                  //图宽
-		this.h=150;                  //图高
-		this.b=15;                   //怪物的肥胖程度，单位px，决定命中角度大小
-		this.imgsRunAll=10;         //怪物跑动图片有几张
-		this.imgsHitAll=21;          //怪物攻击图片有几张
-		this.imgsKnockbackAll=32;        //怪物受伤有几张图片
-		this.imgsDeathAll=32;          //怪物死亡图片有几张
+		this.name=obj.name;            //怪物名字
+		this.maxHp=obj.maxHp;         //最大生命值，不变化，用作血条百分比判断，变化的是this.hp当前生命值
+		this.atk=obj.atk;               //攻击力
+		this.rate=obj.rate;            //攻击速度，单位秒
+		this.atr=obj.atr;               //攻击范围
+		this.speed=obj.speed;          //移动速度(实际移动距离)
+		this.w=obj.w;                  //图宽
+		this.h=obj.h;                  //图高
+		this.b=obj.b;                   //怪物的肥胖程度，单位px，决定命中角度大小
+		this.imgsRunAll=obj.imgsRunAll;         //怪物跑动图片有几张
+		this.imgsHitAll=obj.imgsHitAll;          //怪物攻击图片有几张
+		this.imgsKnockbackAll=obj.imgsKnockbackAll; //怪物受伤有几张图片
+		this.imgsDeathAll=obj.imgsDeathAll;      //怪物死亡图片有几张
 		//不需要定制的
 		this.canAtk=true;                //是否可以攻击（因攻击速度限制），true代表可以攻击
 		this.hp=this.maxHp;                  //当前生命值
@@ -95,12 +95,12 @@ class Monster{
 			if(this.hitNow===this.imgsHitAll){   
 				//人物掉血
 				c.p.hp-=this.atk*c.p.coe;     //人物掉血等于怪物攻击力*人物受伤系数
-				c.p.scratchNum=1;      //人物身上出现抓痕
 				//判断人物血量，被攻击时再判断即可，不需要每一帧都判断，所以放在这里进行判断
 				if(c.p.hp<=0){     //人物没血死亡
-//					c.p.death();    //game over
-//					return;       //游戏结束，没必要继续了
+					c.gameOver();    //game over
+					return;       //游戏结束，没必要继续了
 				}
+				c.p.scratchNum=1;      //人物身上出现抓痕
 				this.hitNow=0;
 				this.status="run";
 			}

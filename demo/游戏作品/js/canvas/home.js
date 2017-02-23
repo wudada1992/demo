@@ -33,14 +33,18 @@ class HomePage{
 			//点击开始游戏
 		ul.getElementsByClassName("play")[0].addEventListener("click",()=>{
 			this.leaveList();     //菜单移出
-			this.main.style.zIndex=1;   //归正主页层级
-			document.getElementById("canvas").style.zIndex=2; //提高canvas元素的层级，漏出canvas背景但不绘制
-			document.getElementById("talent_wrap").style.zIndex=3; //提高天赋页层级
-			c.creatP(count());      //new出人物实例，参数是count计算后返回的对象，里面包含了所有技能的当前等级包括0,在这里new p是为了防止点击go进入canvas时new p太慢而卡顿
+			this.leaveLogo();      //logo移出
+			setTimeout(()=>{      //等待菜单移出动画演示完毕
+				t.enter();            //天赋树进入
+			},900)
 		})
 	}
 	pushLogo(){      //logo动画进入主页
-		TweenMax.staggerFrom("#logo", 2, {y:-200, delay:1.5, ease:Elastic.easeOut}, 0);
+		TweenMax.from("#logo", 2, {y:-200, delay:1.5, ease:Elastic.easeOut});
+	                    //选择的元素  持续时间        css参数                      延迟                                     函数                  距前一项时间间隔
+	}
+	leaveLogo(){      //logo动画离开主页
+		TweenMax.to("#logo", 2, {y:-200, delay:0.5, ease:Elastic.easeOut});
 	                    //选择的元素  持续时间        css参数                                                     延迟                                     函数                  距前一项时间间隔
 	}
 	pushList(){     //list菜单进入主页

@@ -1,14 +1,11 @@
-//主页、天赋页、canvas三页切换逻辑
-//一上来的时候只有一个video、空天赋树、空画布，new主页才生成logo、list；talent（）天赋树才有内容；new c才放入人
-
-	let homePage=new HomePage();   //生成主页对象
-	let c;                         //canvas实例
-	homePage.pushLogo();           //logo动画进入
-	homePage.pushList();           //菜单动画进入
-	//稍微推迟一下天赋树和canvas的加载，给video的加载留出更多空间
-	setTimeout(function(){
-	    talent();   //初始化天赋树
-	    c=new Canvas();       //生成canvas对象并初始化，canvas元素以can形式挂在canvas对象上
-	},500);
-
-
+//主函数
+let home = new HomePage(); //生成主页对象
+let c; //canvas实例
+let t; //天赋树实例
+home.pushLogo(); //logo动画进入
+home.pushList(); //菜单动画进入
+//稍微推迟一下天赋树和canvas的加载，给video的加载留出更多空间
+setTimeout(function() {
+	t = new Talent(); //初始化天赋树
+	c = new Canvas(); //生成canvas对象并初始化,此时并未生成人物实例p，canvas元素以can形式挂在canvas对象上
+}, 500);

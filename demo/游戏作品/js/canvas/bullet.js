@@ -39,7 +39,6 @@ class Bullet{
 				value.hpNum=1;
 				//掉血（受暴击影响）
 				if(this.cr==true){        //如果当前子弹是暴击，攻击力受爆伤影响
-					console.log(c.p.damage,c.p.hurt);
 					value.hp-=c.p.damage*c.p.hurt;
 					value.pNum=1;            //在怪物身上标记显示pow图片
 				}else{                    //如果没有暴击，攻击力正常

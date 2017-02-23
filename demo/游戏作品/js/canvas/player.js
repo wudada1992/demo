@@ -6,25 +6,21 @@ class Player{
 //			speed:1
 //		}
 		//可以定制的
-		this.damage=1+obj.atk+obj.atkB*2;           //人物攻击力
-		this.speed=1+obj.speed*0.5;     //移动速度（实际移动距离）
-		this.maxHp=100+obj.hp*50;          //人物血量上限
-		this.atr=500+obj.atr*100;             //攻击范围
-		this.coe=1+obj.atkB*0.2;                //受伤系数
-		this.cri=0.2+obj.cri*0.1;             //暴击率
+		this.damage=5+obj.atk*obj.atk+obj.atkB*2;           //人物攻击力
+		this.speed=1+obj.speed*obj.speed*0.2;     //移动速度（实际移动距离）
+		this.maxHp=200+obj.hp*obj.hp*50;          //人物血量上限
+		this.atr=500+obj.atr*obj.atr*50;             //攻击范围
+		this.coe=obj.atkB===0?1:(2-obj.atkB*0.3);   //受伤系数
+		this.cri=obj.cri*obj.cri*0.1;             //暴击率
 		this.nb=0+obj.nb*2;            //子弹击退等级
-		this.rate=1-obj.rate*0.2;     //射击速度,单位是秒
+		this.rate=1-obj.rate*0.1;     //射击速度,单位是秒
 		this.thump=obj.thump;         //百步穿杨
 		this.shot=0+obj.vast*2+obj.num*2;   //每次攻击发射几颗子弹，由vast+num共同决定
-		this.hurt=2+obj.hurt*1;        //暴击伤害，未添加功能
-		
+		this.hurt=2+obj.hurt*2;        //暴击伤害
 //Object.assign()用来覆盖对象,es7.   es6直接用 class a extends b 来继承class
 		//不需要定制的
 		this.name="archer";      //名字弓箭手
 		this.img=[];             //存放即将要绘制的图片
-		
-		
-		
 		this.status="";          //人物站立还是奔跑状态stand、run
 		this.status1="";         //人物是否攻击状态atk
 		this.scratchNum=0;   //显示抓痕计数，为0时不显示抓痕，不为0时为循环显示抓痕状态。（动物攻击时将此数设为1），循环到设定之后然后自动归零
@@ -204,7 +200,6 @@ class Player{
 				this.runHeadNow++;
 				this.runHeadNow%=this.imgsRunHeadAll;
 			}
-			
 		}
 	}
 	creatImgs(){
