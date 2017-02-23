@@ -8,7 +8,7 @@ class Player{
 		//可以定制的
 		this.damage=5+obj.atk*obj.atk+obj.atkB*2;           //人物攻击力
 		this.speed=1+obj.speed*obj.speed*0.2;     //移动速度（实际移动距离）
-		this.maxHp=200+obj.hp*obj.hp*50;          //人物血量上限
+		this.maxHp=20+obj.hp*obj.hp*50;          //人物血量上限
 		this.atr=500+obj.atr*obj.atr*50;             //攻击范围
 		this.coe=obj.atkB===0?1:(2-obj.atkB*0.3);   //受伤系数
 		this.cri=obj.cri*obj.cri*0.1;             //暴击率
@@ -76,10 +76,15 @@ class Player{
 			c.ctx.drawImage(this.img[i],-this.w*0.5,-this.h*0.5,this.w,this.h);
 		}
 		c.ctx.restore();   //使里面设置不影响外面
-		//判断是否显示抓痕
-		this.showScratch();
-		//判断是否显示血条
+		//一直显示人物血条
 		this.showHp();
+		//进行生死判断
+		if(this.hp<=0){  //如果人物没血了，gameOver
+			c.gameOver();
+			return;
+		}
+		//判断是否显示抓痕。放在生死判断之后，如果死亡了就不显示抓痕，不显示全局红色。
+		this.showScratch();
 	}
 	move(){
 		if(c.keySet.size){   //如果按键数组里面有内容，奔跑状态

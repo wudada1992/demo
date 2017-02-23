@@ -95,17 +95,12 @@ class Monster{
 			if(this.hitNow===this.imgsHitAll){   
 				//人物掉血
 				c.p.hp-=this.atk*c.p.coe;     //人物掉血等于怪物攻击力*人物受伤系数
-				//判断人物血量，被攻击时再判断即可，不需要每一帧都判断，所以放在这里进行判断
-				if(c.p.hp<=0){     //人物没血死亡
-					c.gameOver();    //game over
-					return;       //游戏结束，没必要继续了
-				}
 				c.p.scratchNum=1;      //人物身上出现抓痕
 				this.hitNow=0;
 				this.status="run";
 			}
 		}
-		this.drawFn();   
+		this.drawFn();     //根据计算好的图片和角度，绘制怪物
 		this.powFn();     //判断是否绘制pow图，如果是则绘制。内置定时this.pNum自动归0结束循环绘制。放在绘制怪物后面，pow可以盖在怪物上面
 		this.showHp();    //判断是否生成血条，原理和showFn一样。this.hpNum计数
 	}
